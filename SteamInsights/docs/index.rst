@@ -10,6 +10,7 @@ Welcome to Steam_Final's documentation!
    :maxdepth: 2
    :caption: Contents:
 
+   readme_link
    my_markdown
    modules
 
