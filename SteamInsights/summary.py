@@ -110,6 +110,24 @@ def get_tags(game_name):
 
 
 
+def get_comp_req(game_name):
+    """
+    Retrieve the system requirements for a specified game.
 
+    Parameters:
+    - game_name (str): The name of the game for which to retrieve system requirements.
+
+    Returns:
+    - pandas.DataFrame: A DataFrame containing system requirements for the specified game.
+      Columns included: 'name', 'windows', 'mac', 'linux'.
+
+    Example:
+    >>> system_requirements = get_comp_req('Example Game')
+    >>> print(system_requirements)
+          name  windows  mac  linux
+    123  Example Game  True  False  True
+    """
+    requirements = all_games[all_games['name'] == game_name]
+    return requirements.loc[:, ['name', 'windows', 'mac', 'linux']]
 
 
