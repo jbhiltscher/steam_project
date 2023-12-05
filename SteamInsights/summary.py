@@ -131,3 +131,57 @@ def get_comp_req(game_name):
     return requirements.loc[:, ['name', 'windows', 'mac', 'linux']]
 
 
+def company_summary(company_name, developer=True):
+    """
+    Generate a summary of games published or developed by a specified company.
+
+    Parameters
+    ----------
+    company_name : str
+        The name of the company for which to generate the summary.
+    developer : bool, optional
+        If True, consider games developed by the company. If False, consider games published by the company. Default is True.
+
+    Returns
+    -------
+    None
+
+    Notes
+    -----
+    This function generates a summary of games associated with a specified company, including the total number of games,
+    the most common sentiment among those games, and information about the price range.
+
+    Parameters:
+    - company_name (str): The name of the company for which to generate the summary.
+    - developer (bool, optional): If True, consider games developed by the company. If False, consider games published by the company. Default is True.
+
+    Examples
+    --------
+    To generate a summary for games developed by Rockstar Games:
+    >>> company_summary('Rockstar Games', True)
+
+    To generate a summary for games published by Electronic Arts:
+    >>> company_summary('Electronic Arts', False)
+    """
+    if developer:
+        df = all_games[all_games['developer'] == company_name]
+    else:
+        df = all_games[all_games['publishers'] == company_name]
+
+    vc = df['all_sentiment'].value_counts()
+    max_price = df['price'].max()
+    min_price = df['price'].min()
+
+    print(f'{company_name} has {len(df)} total games on Steam.')
+    print(f'The most common sentiment is {vc.idxmax()} from {vc[0]} of their {len(df)} games.')
+
+    if min_price == 0 and max_price == 0:
+        print(f'All of their games are free.')
+    elif min_price == 0:
+        print(f'Their most expensive game is ${max_price}, while their least expensive game is free.')
+    elif max_price == min_price:
+        print(f'All of their games are ${max_price}')
+    else:
+        print(f'Their most expensive game is ${max_price}, while their least expensive game is ${min_price}.')
+    return
+
