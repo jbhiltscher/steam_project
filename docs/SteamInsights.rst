@@ -12,18 +12,18 @@ SteamInsights.cleaning module
    :undoc-members:
    :show-inheritance:
 
-SteamInsights.sales\_corr module
---------------------------------
-
-.. automodule:: SteamInsights.sales_corr
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
 SteamInsights.summary module
 ----------------------------
 
 .. automodule:: SteamInsights.summary
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+SteamInsights.analytic_functions module
+----------------------------
+
+.. automodule:: SteamInsights.analytic_functions
    :members:
    :undoc-members:
    :show-inheritance:

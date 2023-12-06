@@ -4,9 +4,14 @@ from scipy.stats import pearsonr
 from scipy.stats import pointbiserialr
 import matplotlib.pyplot as plt
 import seaborn as sns
+import pkg_resources
 
-all_games = pd.read_csv('data/all_games_cleaned.csv')
-tags = pd.read_csv('data/tags.csv')
+
+data_path = pkg_resources.resource_filename('SteamInsights', 'data/all_games_cleaned.csv')
+all_games = pd.read_csv(data_path)
+
+tag_path = pkg_resources.resource_filename('SteamInsights', 'data/tags.csv')
+tags = pd.read_csv(tag_path)
 
 
 def graph(col1, col2, col_types='cont-cont'):

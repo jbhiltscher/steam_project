@@ -1,8 +1,14 @@
 import pandas as pd
 import numpy as np
 
-all_games = pd.read_csv('data/all_games_cleaned.csv')
-tags = pd.read_csv('data/tags.csv')
+import pkg_resources
+
+
+data_path = pkg_resources.resource_filename('SteamInsights', 'data/all_games_cleaned.csv')
+all_games = pd.read_csv(data_path)
+
+tag_path = pkg_resources.resource_filename('SteamInsights', 'data/tags.csv')
+tags = pd.read_csv(tag_path)
 
 def game_summary(game_name):
     """
@@ -21,6 +27,7 @@ def game_summary(game_name):
                name       publishers     developers  all_sentiment  global_sales  release_year
     123  Example Game  Example Publisher  Example Dev   Positive       10.5          2020
     """
+
     summary = all_games[all_games['name'] == game_name]
     return summary.loc[:, ['name', 'publishers', 'developers', 'all_sentiment', 'global_sales', 'release_year']]
 # game_summary('Farming Simulator 17')
@@ -44,6 +51,7 @@ def get_sentiment(game_name):
                name recent_sentiment  recent_review_number  recent_positive_percentage  all_sentiment  all_review_number  all_positive_percentage
     123  Example Game  Mostly Positive  500                   80.0                         Positive       1000               75.0
     """
+
     sentiment = all_games[all_games['name'] == game_name]
     return sentiment.loc[:, ['name', 'recent_sentiment', 'recent_review_number', 'recent_positive_percentage', 'all_sentiment', 'all_review_number', 'all_positive_percentage' ]]
 
@@ -65,6 +73,7 @@ def get_sales_info(game_name):
                    name  price  estimated_owners  global_sales  release_year
         123  Example Game  29.99  5000000           10.5          2020
         """
+
     sale = all_games[all_games['name'] == game_name]
     return sale.loc[:, ['name', 'price', 'estimated_owners', 'global_sales', 'release_year']]
 
@@ -86,6 +95,7 @@ def get_genre(game_name):
                name  achievements  single_player  categories         genres                tags            popular_tags
     123  Example Game  50            True           Action, RPG  Action, RPG, Adventure  Action, Adventure   Open World, Story Rich
     """
+
     genres = all_games[all_games['name'] == game_name]
     return genres.loc[:, ['name', 'achievements', 'single_player', 'categories', 'genres', 'tags', 'popular_tags']]
 
@@ -105,6 +115,7 @@ def get_tags(game_name):
     >>> print(game_tags)
     ['Action', 'Adventure', 'Classic', 'Platformer']
     """
+
     game_tags = tags[tags['name'] == game_name]
     return game_tags.columns[game_tags.iloc[0] == 1].tolist()
 
@@ -127,6 +138,7 @@ def get_comp_req(game_name):
           name  windows  mac  linux
     123  Example Game  True  False  True
     """
+
     requirements = all_games[all_games['name'] == game_name]
     return requirements.loc[:, ['name', 'windows', 'mac', 'linux']]
 
@@ -163,6 +175,7 @@ def company_summary(company_name, developer=True):
     To generate a summary for games published by Electronic Arts:
     >>> company_summary('Electronic Arts', False)
     """
+
     if developer:
         df = all_games[all_games['developer'] == company_name]
     else:
