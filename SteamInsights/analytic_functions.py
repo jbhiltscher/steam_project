@@ -170,7 +170,7 @@ def analyze(col1, col2, col_types=('cont-cont'), plot=False):
 
     if (col_types == 'cont-cont'):
 
-        correlation_coef, p_value = pearsonr(df['price'], df['global_sales'])
+        correlation_coef, p_value = pearsonr(df[col1], df[col2])
         print(f'The correlation coefficient is: {correlation_coef}')
         print(f'The P value for the hypothesis test is: {p_value}')
 
