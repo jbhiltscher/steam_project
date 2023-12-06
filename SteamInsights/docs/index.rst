@@ -13,6 +13,7 @@ Welcome to Steam_Final's documentation!
    readme_link
    my_markdown
    modules
+   SteamInsights
 
 
 

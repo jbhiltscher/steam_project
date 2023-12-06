@@ -75,6 +75,10 @@ games.loc[games['Categories'].str.contains('Multi') & ~games['Categories'].str.c
 games.loc[games['Categories'].str.contains('Single') & ~games['Categories'].str.contains('Multi').isna(), 'players'] = 'single'
 games.loc[games['Categories'].str.contains('Single') & games['Categories'].str.contains('Multi'), 'players'] = 'single/multi'
 games.drop('Categories', axis=1, inplace=True)
+games['price_rounded'] = games['Price'].round()
+bins = [0, .01, 5, 10, 15, 20, 30, 40, 50, 60, float('inf')]
+labels = ['free', '0-5', '5-10', '10-15', '15-20', '20-30', '30-40', '40-50', '50-60', '60+']
+games['price_category'] = pd.cut(games['price_rounded'], bins=bins, labels=labels, right=False)
 games.columns = games.columns.str.lower().str.replace(' ', '_')
 games.to_csv('data/games_cleaned.csv', index=False)
 
