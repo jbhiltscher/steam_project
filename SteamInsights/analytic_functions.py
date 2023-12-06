@@ -442,3 +442,99 @@ def tags_related(num=5, plot=False):
         tags_related_plot(result)
     else:
         return result
+
+
+
+def top_n_values(df, column='developers', criteria='price', top_n=5, plot=False):
+    """
+    Get the top producers/developers based on the specified criteria.
+
+    Parameters:
+    - df: pandas DataFrame containing game information.
+    - column: String specifying the desired grouped column (e.g., 'developers', 'genres').
+    - criteria: String specifying the criteria ('price', 'metacritic_score', 'global_sales').
+    - top_n: Number of top producers to retrieve.
+    - plot: Boolean indicating whether to plot the top values on a bar chart.
+
+    Returns:
+    - A DataFrame with the top producers/developers based on the specified criteria.
+    
+    Example:
+    - top_n_values(all_games, column='developers', criteria='global_sales', top_n=10, plot=True)
+    
+    """
+
+    if criteria not in ['price', 'metacritic_score', 'user_score', 'global_sales']:
+        raise ValueError("Invalid criteria. Choose from 'price', 'metacritic_score', 'user_score', or 'global_sales'.")
+
+    # Group by developers and calculate the mean for the specified criteria
+    
+    grouped_df = df.groupby(column)[criteria].mean()
+
+    # Get the top n producers
+    top_group = grouped_df.nlargest(top_n).reset_index()
+
+    # Plot the top values on a bar chart if plot=True
+    if plot:
+        plt.figure(figsize=(10, 6))
+        bar_plot = sns.barplot(x=column, y=criteria, data=top_group, palette='viridis')
+        plt.title(f'Top {top_n} {column} by {criteria}')
+        plt.xlabel(column)
+        plt.ylabel(criteria)
+        bar_plot.set_xticklabels(bar_plot.get_xticklabels(), rotation=45, horizontalalignment='right')
+
+        plt.show()
+
+    return top_group
+
+
+def analyze_single_vs_multiplayer(df):
+    """
+    Analyze and compare sales and ratings of single-player and multiplayer games.
+
+    Parameters:
+    - df: pandas DataFrame containing game information.
+
+    Returns:
+    - A DataFrame with the summary statistics for single-player and multiplayer games.
+    """
+
+    # Filter single-player and multiplayer games
+    single_player_games = df[df['single_player'] == True]
+    multiplayer_games = df[df['single_player'] == False]
+
+    # Calculate average sales and sentiment for each category
+    single_player_sales = single_player_games['global_sales'].mean()
+    multiplayer_sales = multiplayer_games['global_sales'].mean()
+
+    single_player_sentiment = single_player_games['all_positive_percentage'].mean()
+    multiplayer_sentiment = multiplayer_games['all_positive_percentage'].mean()
+
+    # Create a DataFrame with the analysis results
+    analysis_results = pd.DataFrame({
+        'Category': ['Single Player', 'Multiplayer'],
+        'Average Sales': [single_player_sales, multiplayer_sales],
+        'Average Sentiment': [single_player_sentiment, multiplayer_sentiment]
+    })
+
+    # Plot the comparison
+    #plt.figure(figsize=(12, 6))
+
+    # Sales Comparison
+    #plt.subplot(1, 2, 1)
+    #sns.barplot(x=sales_summary.index, y='mean', hue='index', data=sales_summary.melt(), palette='Set2')
+    #plt.title('Global Sales Comparison')
+    #plt.ylabel('Global Sales')
+    #plt.xlabel('Game Type')
+
+    # Ratings Comparison
+    #plt.subplot(1, 2, 2)
+    #sns.barplot(x=ratings_summary.index, y='value', hue='index', data=ratings_summary.melt(), palette='Set2')
+    #plt.title('Ratings Comparison')
+    #plt.ylabel('Average Rating')
+    #plt.xlabel('Game Type')
+
+    #plt.tight_layout()
+    #plt.show()
+
+    return analysis_results
