@@ -1,0 +1,647 @@
+
+
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>SteamInsights package &#8212; steam_final 0.0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b76e3c8a" />
+    <link rel="stylesheet" type="text/css" href="_static/cloud.css?v=f9ae72be" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
+    
+    <script src="_static/documentation_options.js?v=d45e8c67"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+
+    
+    
+     
+        <script src="_static/jquery.cookie.js"></script>
+    
+
+    
+     
+        <script src="_static/cloud.base.js"></script>
+    
+
+    
+     
+        <script src="_static/cloud.js"></script>
+    
+
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="SteamInsights.data package" href="SteamInsights.data.html" />
+    <link rel="prev" title="Welcome to steam_final’s documentation!" href="index.html" /> 
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head><body>
+    <div class="relbar-top">
+        
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="SteamInsights.data.html" title="SteamInsights.data package"
+             accesskey="N">next</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to steam_final’s documentation!"
+             accesskey="P">previous</a> &nbsp; &nbsp;</li>
+    <li><a href="index.html">steam_final 0.0.1 documentation</a> &#187;</li>
+
+        <li class="nav-item nav-item-this"><a href="">SteamInsights package</a></li> 
+      </ul>
+    </div>
+    </div>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="steaminsights-package">
+<h1>SteamInsights package<a class="headerlink" href="#steaminsights-package" title="Link to this heading">¶</a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Link to this heading">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="SteamInsights.data.html">SteamInsights.data package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="SteamInsights.data.html#module-SteamInsights.data">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">¶</a></h2>
+</section>
+<section id="module-SteamInsights.analytic_functions">
+<span id="steaminsights-analytic-functions-module"></span><h2>SteamInsights.analytic_functions module<a class="headerlink" href="#module-SteamInsights.analytic_functions" title="Link to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="SteamInsights.analytic_functions.analyze">
+<span class="sig-prename descclassname"><span class="pre">SteamInsights.analytic_functions.</span></span><span class="sig-name descname"><span class="pre">analyze</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">col1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col_types</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cont-cont'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/SteamInsights/analytic_functions.html#analyze"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SteamInsights.analytic_functions.analyze" title="Link to this definition">¶</a></dt>
+<dd><p>Analyze the relationship between two columns in a DataFrame.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>col1</strong> (<em>str</em>) – The name of the first column.</p></li>
+<li><p><strong>col2</strong> (<em>str</em>) – The name of the second column.</p></li>
+<li><p><strong>col_types</strong> (<em>{'cont-cont'</em><em>, </em><em>'cont-cat'</em><em>, </em><em>'cat-cat'}</em><em>, </em><em>optional</em>) – The types of the columns for analysis:
+- ‘cont-cont’: Continuous vs. Continuous
+- ‘cont-cat’: Continuous vs. Categorical
+- ‘cat-cat’: Categorical vs. Categorical
+Default is ‘cont-cont’.</p></li>
+<li><p><strong>plot</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, generate and display relevant plots based on the analysis.
+Default is False.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>If the analysis is not possible due to insufficient data, a message is returned.
+Otherwise, None is returned.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str or None</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">analyze</span><span class="p">(</span><span class="s1">&#39;price&#39;</span><span class="p">,</span> <span class="s1">&#39;global_sales&#39;</span><span class="p">,</span> <span class="n">col_types</span><span class="o">=</span><span class="s1">&#39;cont-cont&#39;</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">The correlation coefficient is: 0.75</span>
+<span class="go">The P value for the hypothesis test is: 0.02</span>
+<span class="go"># (Output for other col_types)</span>
+</pre></div>
+</div>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>For ‘cont-cat’ analysis, certain metrics may not be meaningful for certain columns, like ‘price’.</p></li>
+<li><p>The function may return a message if the dataset has less than 15 values after dropping NA rows.</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="SteamInsights.analytic_functions.analyze_single_vs_multiplayer">
+<span class="sig-prename descclassname"><span class="pre">SteamInsights.analytic_functions.</span></span><span class="sig-name descname"><span class="pre">analyze_single_vs_multiplayer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/SteamInsights/analytic_functions.html#analyze_single_vs_multiplayer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SteamInsights.analytic_functions.analyze_single_vs_multiplayer" title="Link to this definition">¶</a></dt>
+<dd><p>Analyze and compare sales and ratings of single-player and multiplayer games.</p>
+<p>Parameters:
+- df: pandas DataFrame containing game information.</p>
+<p>Returns:
+- A DataFrame with the summary statistics for single-player and multiplayer games.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="SteamInsights.analytic_functions.compare_two_tags">
+<span class="sig-prename descclassname"><span class="pre">SteamInsights.analytic_functions.</span></span><span class="sig-name descname"><span class="pre">compare_two_tags</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tag1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tag2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/SteamInsights/analytic_functions.html#compare_two_tags"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SteamInsights.analytic_functions.compare_two_tags" title="Link to this definition">¶</a></dt>
+<dd><p>Compare two binary tags in a DataFrame using correlation and a cross-tabulation heatmap.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tag1</strong> (<em>str</em>) – The name of the first binary tag for comparison.</p></li>
+<li><p><strong>tag2</strong> (<em>str</em>) – The name of the second binary tag for comparison.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Displays correlation information and a cross-tabulation heatmap.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>This function compares two binary tags in a DataFrame by calculating the point-biserial correlation
+coefficient and visualizing the cross-tabulation results using a heatmap. The correlation coefficient
+indicates the strength and direction of the relationship between the two tags. This function can be
+used to observe how often two different tags are used together to describe one game.</p>
+<p>Parameters:
+- tag1 (str): The name of the first binary tag.
+- tag2 (str): The name of the second binary tag.</p>
+<p class="rubric">Examples</p>
+<p>To compare the tags ‘Action’ and ‘Adventure’:
+&gt;&gt;&gt; compare_two_tags(‘Action’, ‘Adventure’)</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="SteamInsights.analytic_functions.graph">
+<span class="sig-prename descclassname"><span class="pre">SteamInsights.analytic_functions.</span></span><span class="sig-name descname"><span class="pre">graph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">col1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col_types</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cont-cont'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/SteamInsights/analytic_functions.html#graph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SteamInsights.analytic_functions.graph" title="Link to this definition">¶</a></dt>
+<dd><p>Generate and display plots for the relationship between two columns in a DataFrame.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>col1</strong> (<em>str</em>) – The name of the first column.</p></li>
+<li><p><strong>col2</strong> (<em>str</em>) – The name of the second column.</p></li>
+<li><p><strong>col_types</strong> (<em>{'cont-cont'</em><em>, </em><em>'cont-cat'</em><em>, </em><em>'cat-cat'}</em><em>, </em><em>optional</em>) – The types of the columns for analysis:
+- ‘cont-cont’: Continuous vs. Continuous
+- ‘cont-cat’: Continuous vs. Categorical
+- ‘cat-cat’: Categorical vs. Categorical
+Default is ‘cont-cont’.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>If the analysis is not possible due to insufficient data, a message is returned.
+Otherwise, None is returned.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str or None</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">graph</span><span class="p">(</span><span class="s1">&#39;price&#39;</span><span class="p">,</span> <span class="s1">&#39;global_sales&#39;</span><span class="p">,</span> <span class="n">col_types</span><span class="o">=</span><span class="s1">&#39;cont-cont&#39;</span><span class="p">)</span>
+<span class="go"># (Plots based on the col_types)</span>
+</pre></div>
+</div>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>The function may return a message if the dataset has less than 15 values after dropping NA rows.</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="SteamInsights.analytic_functions.graph_mean_tag_prices">
+<span class="sig-prename descclassname"><span class="pre">SteamInsights.analytic_functions.</span></span><span class="sig-name descname"><span class="pre">graph_mean_tag_prices</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">which</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'common'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">drop_zeroes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/SteamInsights/analytic_functions.html#graph_mean_tag_prices"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SteamInsights.analytic_functions.graph_mean_tag_prices" title="Link to this definition">¶</a></dt>
+<dd><p>Visualize mean prices for game tags in a bar plot.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>which</strong> (<em>str</em><em>, </em><em>optional</em>) – Specifies the criteria for selecting tags. Options are ‘common’ (top N most common),
+‘most_exp’ (top N most expensive), or ‘least_exp’ (top N least expensive). Default is ‘common’.</p></li>
+<li><p><strong>num</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of tags to display in the plot. Should be no greater than 20 for readability.
+Default is 10.</p></li>
+<li><p><strong>drop_zeroes</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, exclude games with a price of 0 from the mean price calculation.
+Default is True.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Displays a bar plot of mean prices for selected tags.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>This function calculates the mean prices for specified tags and visualizes the results in a bar plot.
+The tags are selected based on the specified criteria (‘common’, ‘most_exp’, or ‘least_exp’).
+If ‘common’ is chosen, it selects the top N most common tags. If ‘most_exp’ or ‘least_exp’ is chosen,
+it selects the top N most or least expensive tags, respectively.
+The plot displays the mean prices on the y-axis and tag names on the x-axis.</p>
+<p class="rubric">Examples</p>
+<p>To plot the mean prices for the top 10 most common tags:
+&gt;&gt;&gt; graph_mean_tag_prices()</p>
+<p>To plot the mean prices for the top 5 most expensive tags:
+&gt;&gt;&gt; graph_mean_tag_prices(which=’most_exp’, num=5)</p>
+<p>To plot the mean prices for the top 8 least expensive tags:
+&gt;&gt;&gt; graph_mean_tag_prices(which=’least_exp’, num=8)</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="SteamInsights.analytic_functions.summary_stats_by_tag">
+<span class="sig-prename descclassname"><span class="pre">SteamInsights.analytic_functions.</span></span><span class="sig-name descname"><span class="pre">summary_stats_by_tag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chosen_tag</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">drop_zeroes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/SteamInsights/analytic_functions.html#summary_stats_by_tag"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SteamInsights.analytic_functions.summary_stats_by_tag" title="Link to this definition">¶</a></dt>
+<dd><p>Calculate summary statistics (min, max, mean) for the prices of games associated with a specified tag.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>chosen_tag</strong> (<em>str</em>) – The tag for which to calculate the summary statistics.</p></li>
+<li><p><strong>drop_zeroes</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, exclude games with a price of 0 from the calculation.
+Default is True.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A dictionary containing the summary statistics:
+- ‘min’: Minimum price
+- ‘max’: Maximum price
+- ‘mean’: Mean price</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>This function filters the ‘all_games’ DataFrame based on the presence of the
+specified tag in the ‘tags’ DataFrame. It then calculates the minimum, maximum,
+and mean prices of the filtered games. Optionally, games with a price of 0 can
+be excluded from the calculation by setting <cite>drop_zeroes</cite> to True.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="SteamInsights.analytic_functions.tags_related">
+<span class="sig-prename descclassname"><span class="pre">SteamInsights.analytic_functions.</span></span><span class="sig-name descname"><span class="pre">tags_related</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/SteamInsights/analytic_functions.html#tags_related"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SteamInsights.analytic_functions.tags_related" title="Link to this definition">¶</a></dt>
+<dd><p>Analyze and visualize the frequency of tag pair combinations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>num</strong> (<em>int</em><em>, </em><em>optional</em>) – The number of tags to consider for analysis. Default is 5.</p></li>
+<li><p><strong>plot</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, plot the results using <cite>tags_related_plot</cite>. Default is False.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A sorted list where each tuple contains a tag pair and its corresponding cross-tabulation table values for ones.
+If <cite>plot</cite> is True, the function returns None.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list of tuples or None</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>This function analyzes the frequency of combinations of two tags in a DataFrame by calculating cross-tabulation tables.
+It returns a sorted list of tuples, where each tuple contains a tag pair and the count of ones in the cross-tabulation.
+If <cite>plot</cite> is True, the function also calls <cite>tags_related_plot</cite> to visualize the results using a bar plot.</p>
+<p>Parameters:
+- num (int, optional): The number of tags to consider for analysis. Default is 5.
+- plot (bool, optional): If True, plot the results. Default is False.</p>
+<p class="rubric">Examples</p>
+<p>To analyze the relationships for the top 5 tags:
+&gt;&gt;&gt; result = tags_related(5)
+&gt;&gt;&gt; print(result)</p>
+<p>To analyze and plot the relationships for the top 10 tags:
+&gt;&gt;&gt; tags_related(10, plot=True)</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="SteamInsights.analytic_functions.tags_related_plot">
+<span class="sig-prename descclassname"><span class="pre">SteamInsights.analytic_functions.</span></span><span class="sig-name descname"><span class="pre">tags_related_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/SteamInsights/analytic_functions.html#tags_related_plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SteamInsights.analytic_functions.tags_related_plot" title="Link to this definition">¶</a></dt>
+<dd><p>Visualize the frequency of tag pair combinations using a bar plot.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>result</strong> (<em>list</em><em> of </em><em>tuples</em>) – A list where each tuple contains a tag pair and its corresponding cross-tabulation table values for ones.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>This function is meant to be used in tandem with the tags_related(num, plot) function when plot is set
+to true and should not be called manually by the user. It takes in a the result of tags_related(), which
+is a list of tuples, where each tuple contains a tag pair and the count of ones in the cross-tabulation.
+It visualizes the results using a bar plot with tag pairs on the x-axis and counts on the y-axis.</p>
+<p>Parameters:
+- result (list of tuples): A list where each tuple contains a tag pair and its corresponding count of ones.</p>
+<p class="rubric">Examples</p>
+<p>To visualize the results for a given list of tag pairs and counts:
+&gt;&gt;&gt; tags_related_plot(result)</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="SteamInsights.analytic_functions.top_n_values">
+<span class="sig-prename descclassname"><span class="pre">SteamInsights.analytic_functions.</span></span><span class="sig-name descname"><span class="pre">top_n_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'developers'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">criteria</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'price'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">top_n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/SteamInsights/analytic_functions.html#top_n_values"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SteamInsights.analytic_functions.top_n_values" title="Link to this definition">¶</a></dt>
+<dd><p>Get the top producers/developers based on the specified criteria.</p>
+<p>Parameters:
+- df: pandas DataFrame containing game information.
+- column: String specifying the desired grouped column (e.g., ‘developers’, ‘genres’).
+- criteria: String specifying the criteria (‘price’, ‘metacritic_score’, ‘global_sales’).
+- top_n: Number of top producers to retrieve.
+- plot: Boolean indicating whether to plot the top values on a bar chart.</p>
+<p>Returns:
+- A DataFrame with the top producers/developers based on the specified criteria.</p>
+<p>Example:
+- top_n_values(all_games, column=’developers’, criteria=’global_sales’, top_n=10, plot=True)</p>
+</dd></dl>
+
+</section>
+<section id="module-SteamInsights.cleaning">
+<span id="steaminsights-cleaning-module"></span><h2>SteamInsights.cleaning module<a class="headerlink" href="#module-SteamInsights.cleaning" title="Link to this heading">¶</a></h2>
+<p>This script imports the raw data, cleans it, and exports the final datasets for games and tags.</p>
+</section>
+<section id="module-SteamInsights.load_data">
+<span id="steaminsights-load-data-module"></span><h2>SteamInsights.load_data module<a class="headerlink" href="#module-SteamInsights.load_data" title="Link to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="SteamInsights.load_data.load_data">
+<span class="sig-prename descclassname"><span class="pre">SteamInsights.load_data.</span></span><span class="sig-name descname"><span class="pre">load_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'all_games'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/SteamInsights/load_data.html#load_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SteamInsights.load_data.load_data" title="Link to this definition">¶</a></dt>
+<dd><p>Function to load data from the Steam Insights Packages.</p>
+</dd></dl>
+
+</section>
+<section id="module-SteamInsights.summary">
+<span id="steaminsights-summary-module"></span><h2>SteamInsights.summary module<a class="headerlink" href="#module-SteamInsights.summary" title="Link to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="SteamInsights.summary.company_summary">
+<span class="sig-prename descclassname"><span class="pre">SteamInsights.summary.</span></span><span class="sig-name descname"><span class="pre">company_summary</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">company_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">developer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/SteamInsights/summary.html#company_summary"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SteamInsights.summary.company_summary" title="Link to this definition">¶</a></dt>
+<dd><p>Generate a summary of games published or developed by a specified company.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>company_name</strong> (<em>str</em>) – </p></li>
+<li><p><strong>summary.</strong> (<em>- The name</em><em> of </em><em>the company for which to generate the</em>) – </p></li>
+<li><p><strong>developer</strong> (<em>bool</em><em>, </em><em>optional</em>) – </p></li>
+<li><p><strong>True</strong> (<em>- If</em>) – </p></li>
+<li><p><strong>False</strong> (<em>consider games developed by the company. If</em>) – </p></li>
+<li><p><strong>True.</strong> (<em>consider games published by the company. Default is</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>This function generates a summary of games associated with a specified company, including the total number of games,
+the most common sentiment among those games, and information about the price range.</p>
+<p>Parameters:
+- company_name (str): The name of the company for which to generate the summary.
+- developer (bool, optional): If True, consider games developed by the company. If False, consider games published by the company. Default is True.</p>
+<p class="rubric">Examples</p>
+<p>To generate a summary for games developed by Rockstar Games:
+&gt;&gt;&gt; company_summary(‘Rockstar Games’, True)</p>
+<p>To generate a summary for games published by Electronic Arts:
+&gt;&gt;&gt; company_summary(‘Electronic Arts’, False)</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="SteamInsights.summary.game_summary">
+<span class="sig-prename descclassname"><span class="pre">SteamInsights.summary.</span></span><span class="sig-name descname"><span class="pre">game_summary</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">game_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/SteamInsights/summary.html#game_summary"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SteamInsights.summary.game_summary" title="Link to this definition">¶</a></dt>
+<dd><p>Retrieve a summary of the specified game.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>game_name</strong> (<em>str</em>) – The name of the game for which to retrieve the summary.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A DataFrame containing the summary information for the specified game.
+Columns included: ‘name’, ‘publishers’, ‘developers’, ‘all_sentiment’, ‘global_sales’, ‘release_year.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pandas.DataFrame</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">summary</span> <span class="o">=</span> <span class="n">game_summary</span><span class="p">(</span><span class="s1">&#39;Example Game&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">summary</span><span class="p">)</span>
+<span class="go">          name       publishers     developers  all_sentiment  global_sales  release_year</span>
+<span class="go">123  Example Game  Example Publisher  Example Dev   Positive       10.5          2020</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="SteamInsights.summary.get_comp_req">
+<span class="sig-prename descclassname"><span class="pre">SteamInsights.summary.</span></span><span class="sig-name descname"><span class="pre">get_comp_req</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">game_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/SteamInsights/summary.html#get_comp_req"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SteamInsights.summary.get_comp_req" title="Link to this definition">¶</a></dt>
+<dd><p>Retrieve the system requirements for a specified game.</p>
+<p>Parameters:
+- game_name (str): The name of the game for which to retrieve system requirements.</p>
+<p>Returns:
+- pandas.DataFrame: A DataFrame containing system requirements for the specified game.</p>
+<blockquote>
+<div><p>Columns included: ‘name’, ‘windows’, ‘mac’, ‘linux’.</p>
+</div></blockquote>
+<p>Example:
+&gt;&gt;&gt; system_requirements = get_comp_req(‘Example Game’)
+&gt;&gt;&gt; print(system_requirements)</p>
+<blockquote>
+<div><p>name  windows  mac  linux</p>
+</div></blockquote>
+<p>123  Example Game  True  False  True</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="SteamInsights.summary.get_genre">
+<span class="sig-prename descclassname"><span class="pre">SteamInsights.summary.</span></span><span class="sig-name descname"><span class="pre">get_genre</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">game_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/SteamInsights/summary.html#get_genre"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SteamInsights.summary.get_genre" title="Link to this definition">¶</a></dt>
+<dd><p>Retrieve genre information for the specified game.</p>
+<p>Parameters:
+- game_name (str): The name of the game for which to retrieve genre information.</p>
+<p>Returns:
+- pandas.DataFrame: A DataFrame containing genre details for the specified game.</p>
+<blockquote>
+<div><p>Columns included: ‘name’, ‘achievements’, ‘single_player’, ‘categories’, ‘genres’, ‘tags’, ‘popular_tags’.</p>
+</div></blockquote>
+<p>Example:
+&gt;&gt;&gt; genre_data = get_genre(‘Example Game’)
+&gt;&gt;&gt; print(genre_data)</p>
+<blockquote>
+<div><p>name  achievements  single_player  categories         genres                tags            popular_tags</p>
+</div></blockquote>
+<p>123  Example Game  50            True           Action, RPG  Action, RPG, Adventure  Action, Adventure   Open World, Story Rich</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="SteamInsights.summary.get_sales_info">
+<span class="sig-prename descclassname"><span class="pre">SteamInsights.summary.</span></span><span class="sig-name descname"><span class="pre">get_sales_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">game_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/SteamInsights/summary.html#get_sales_info"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SteamInsights.summary.get_sales_info" title="Link to this definition">¶</a></dt>
+<dd><p>Retrieve sales information for the specified game.</p>
+<p>Parameters:
+- game_name (str): The name of the game for which to retrieve sales information.</p>
+<p>Returns:
+- pandas.DataFrame: A DataFrame containing sales details for the specified game.</p>
+<blockquote>
+<div><p>Columns included: ‘name’, ‘price’, ‘estimated_owners’, ‘global_sales’, ‘release_year’.</p>
+</div></blockquote>
+<p>Example:
+&gt;&gt;&gt; sales_data = get_sales_info(‘Example Game’)
+&gt;&gt;&gt; print(sales_data)</p>
+<blockquote>
+<div><p>name  price  estimated_owners  global_sales  release_year</p>
+</div></blockquote>
+<p>123  Example Game  29.99  5000000           10.5          2020</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="SteamInsights.summary.get_sentiment">
+<span class="sig-prename descclassname"><span class="pre">SteamInsights.summary.</span></span><span class="sig-name descname"><span class="pre">get_sentiment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">game_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/SteamInsights/summary.html#get_sentiment"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SteamInsights.summary.get_sentiment" title="Link to this definition">¶</a></dt>
+<dd><p>Retrieve sentiment information for the specified game.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>game_name</strong> (<em>str</em>) – The name of the game for which to retrieve sentiment information.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A DataFrame containing sentiment details for the specified game.
+Columns included: ‘name’, ‘recent_sentiment’, ‘recent_review_number’, ‘recent_positive_percentage’,
+‘all_sentiment’, ‘all_review_number’, ‘all_positive_percentage.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pandas.DataFrame</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sentiment_data</span> <span class="o">=</span> <span class="n">get_sentiment</span><span class="p">(</span><span class="s1">&#39;Example Game&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">sentiment_data</span><span class="p">)</span>
+<span class="go">          name recent_sentiment  recent_review_number  recent_positive_percentage  all_sentiment  all_review_number  all_positive_percentage</span>
+<span class="go">123  Example Game  Mostly Positive  500                   80.0                         Positive       1000               75.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="SteamInsights.summary.get_tags">
+<span class="sig-prename descclassname"><span class="pre">SteamInsights.summary.</span></span><span class="sig-name descname"><span class="pre">get_tags</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">game_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/SteamInsights/summary.html#get_tags"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SteamInsights.summary.get_tags" title="Link to this definition">¶</a></dt>
+<dd><p>Retrieve tags associated with the specified game.</p>
+<p>Parameters:
+- game_name (str): The name of the game for which to retrieve tags.</p>
+<p>Returns:
+- List[str]: A list of tags associated with the specified game.</p>
+<p>Example:
+&gt;&gt;&gt; game_tags = get_tags(‘Example Game’)
+&gt;&gt;&gt; print(game_tags)
+[‘Action’, ‘Adventure’, ‘Classic’, ‘Platformer’]</p>
+</dd></dl>
+
+</section>
+<section id="module-SteamInsights">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-SteamInsights" title="Link to this heading">¶</a></h2>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="sphinx-toc sphinxlocaltoc">
+    <h3><a href="index.html">Page contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">SteamInsights package</a><ul>
+<li><a class="reference internal" href="#subpackages">Subpackages</a></li>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-SteamInsights.analytic_functions">SteamInsights.analytic_functions module</a><ul>
+<li><a class="reference internal" href="#SteamInsights.analytic_functions.analyze"><code class="docutils literal notranslate"><span class="pre">analyze()</span></code></a></li>
+<li><a class="reference internal" href="#SteamInsights.analytic_functions.analyze_single_vs_multiplayer"><code class="docutils literal notranslate"><span class="pre">analyze_single_vs_multiplayer()</span></code></a></li>
+<li><a class="reference internal" href="#SteamInsights.analytic_functions.compare_two_tags"><code class="docutils literal notranslate"><span class="pre">compare_two_tags()</span></code></a></li>
+<li><a class="reference internal" href="#SteamInsights.analytic_functions.graph"><code class="docutils literal notranslate"><span class="pre">graph()</span></code></a></li>
+<li><a class="reference internal" href="#SteamInsights.analytic_functions.graph_mean_tag_prices"><code class="docutils literal notranslate"><span class="pre">graph_mean_tag_prices()</span></code></a></li>
+<li><a class="reference internal" href="#SteamInsights.analytic_functions.summary_stats_by_tag"><code class="docutils literal notranslate"><span class="pre">summary_stats_by_tag()</span></code></a></li>
+<li><a class="reference internal" href="#SteamInsights.analytic_functions.tags_related"><code class="docutils literal notranslate"><span class="pre">tags_related()</span></code></a></li>
+<li><a class="reference internal" href="#SteamInsights.analytic_functions.tags_related_plot"><code class="docutils literal notranslate"><span class="pre">tags_related_plot()</span></code></a></li>
+<li><a class="reference internal" href="#SteamInsights.analytic_functions.top_n_values"><code class="docutils literal notranslate"><span class="pre">top_n_values()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-SteamInsights.cleaning">SteamInsights.cleaning module</a></li>
+<li><a class="reference internal" href="#module-SteamInsights.load_data">SteamInsights.load_data module</a><ul>
+<li><a class="reference internal" href="#SteamInsights.load_data.load_data"><code class="docutils literal notranslate"><span class="pre">load_data()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-SteamInsights.summary">SteamInsights.summary module</a><ul>
+<li><a class="reference internal" href="#SteamInsights.summary.company_summary"><code class="docutils literal notranslate"><span class="pre">company_summary()</span></code></a></li>
+<li><a class="reference internal" href="#SteamInsights.summary.game_summary"><code class="docutils literal notranslate"><span class="pre">game_summary()</span></code></a></li>
+<li><a class="reference internal" href="#SteamInsights.summary.get_comp_req"><code class="docutils literal notranslate"><span class="pre">get_comp_req()</span></code></a></li>
+<li><a class="reference internal" href="#SteamInsights.summary.get_genre"><code class="docutils literal notranslate"><span class="pre">get_genre()</span></code></a></li>
+<li><a class="reference internal" href="#SteamInsights.summary.get_sales_info"><code class="docutils literal notranslate"><span class="pre">get_sales_info()</span></code></a></li>
+<li><a class="reference internal" href="#SteamInsights.summary.get_sentiment"><code class="docutils literal notranslate"><span class="pre">get_sentiment()</span></code></a></li>
+<li><a class="reference internal" href="#SteamInsights.summary.get_tags"><code class="docutils literal notranslate"><span class="pre">get_tags()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-SteamInsights">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div class="sphinxprev">
+    <h4>Previous page</h4>
+    <p class="topless"><a href="index.html"
+                          title="Previous page">&larr; Welcome to steam_final’s documentation!</a></p>
+  </div>
+  <div class="sphinxnext">
+    <h4>Next page</h4>
+    <p class="topless"><a href="SteamInsights.data.html"
+                          title="Next page">&rarr; SteamInsights.data package</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/SteamInsights.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+    
+    
+        <div class="sidebar-toggle-group no-js">
+            
+            <button class="sidebar-toggle" id="sidebar-hide" title="Hide the sidebar menu">
+                 «
+                <span class="show-for-small">hide menu</span>
+                
+            </button>
+            <button class="sidebar-toggle" id="sidebar-show" title="Show the sidebar menu">
+                
+                <span class="show-for-small">menu</span>
+                <span class="hide-for-small">sidebar</span>
+                 »
+            </button>
+        </div>
+    
+      <div class="clearer"></div>
+    </div>
+    <div class="relbar-bottom">
+        
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="SteamInsights.data.html" title="SteamInsights.data package"
+             >next</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to steam_final’s documentation!"
+             >previous</a> &nbsp; &nbsp;</li>
+    <li><a href="index.html">steam_final 0.0.1 documentation</a> &#187;</li>
+
+        <li class="nav-item nav-item-this"><a href="">SteamInsights package</a></li> 
+      </ul>
+    </div>
+    </div>
+
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2023, Caroline Rose, Jake Hiltscher.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
+    </div>
+    <!-- cloud_sptheme 1.4 -->
+  </body>
+</html>
