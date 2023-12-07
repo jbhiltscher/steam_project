@@ -5,25 +5,23 @@
 
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
-
-import os, sys
+import os
+import sys
 sys.path.insert(0, os.path.abspath('..'))
 
 
-project = 'Steam Analysis'
-copyright = '2023, Caroline Jarman, Jake Hiltscher'
-author = 'Caroline Jarman, Jake Hiltscher'
-release = '1.0.0'
+project = 'steam_final'
+copyright = '2023, Caroline Rose, Jake Hiltscher'
+author = 'Caroline Rose, Jake Hiltscher'
+release = '0.0.1'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
-extensions = ['sphinx.ext.autodoc', 'sphinx.ext.napoleon', 'sphinx.ext.viewcode', 'myst_parser', 'sphinx.ext.githubpages']
+extensions = ['sphinx.ext.viewcode', 'sphinx.ext.autodoc']
 
 templates_path = ['_templates']
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
-
-source_suffix = ['.rst', '.md']
 
 
 

@@ -1,7 +1,10 @@
-SteamInsights
-=============
+py_code
+=======
 
 .. toctree::
    :maxdepth: 4
 
-   SteamInsights
+   analytic_functions
+   cleaning
+   load_data
+   summary
