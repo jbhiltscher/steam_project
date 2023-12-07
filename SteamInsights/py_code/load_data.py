@@ -1,7 +1,6 @@
 import pkg_resources
 import pandas as pd
 
-
 def load_data(name = 'all_games'):
     """
     Function to load data from the Steam Insights Packages.
