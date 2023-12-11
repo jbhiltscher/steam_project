@@ -6,7 +6,6 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import pkg_resources
 
-
 data_path = pkg_resources.resource_filename('SteamInsights', 'data/all_games_cleaned.csv')
 all_games = pd.read_csv(data_path)
 
@@ -51,14 +50,11 @@ def graph(col1, col2, col_types='cont-cont'):
     df = all_games.dropna(subset=columns)
     df = df.loc[:, columns]
 
-    # if the length of the df is now less than 20, it might be wrong to analyse the relationship?
-    if (df.shape[0] < 15):
+    # if the length of the df is now less than 15, it might be wrong to analyse the relationship?
+    if df.shape[0] < 15:
         return ("This relationship has less than 15 values to analyze")
 
     if (col_types == 'cont-cont'):
-        #         sns.scatterplot(x=col1, y=col2, data=df)
-        #         plt.show()
-
         plt.figure(figsize=(12, 8))
         sns.jointplot(x=col1, y=col2, data=df)
         plt.show()
@@ -77,25 +73,13 @@ def graph(col1, col2, col_types='cont-cont'):
         sns.boxplot(x=col2, y=col1, data=df)
         plt.show()
 
-        #         sns.violinplot(x=col2, y=col1, data=df)
-        #         plt.show()
-
         plt.figure(figsize=(12, 8))
         sns.barplot(x=col2, y=col1, data=df)
         plt.show()
 
-        #         sns.pointplot(x=col2, y=col1, data=df)
-        #         plt.show()
-
-        #         sns.swarmplot(x=col2, y=col1, data=df)
-        #         plt.show()
         plt.figure(figsize=(12, 8))
         sns.countplot(x=col2, data=df)
         plt.show()
-
-    #         g = sns.FacetGrid(df, col=col2)
-    #         g.map(sns.histplot, col1)
-    #         plt.show()
 
     elif (col_types == 'cat-cat'):
         plt.figure(figsize=(12, 8))
@@ -107,25 +91,12 @@ def graph(col1, col2, col_types='cont-cont'):
         sns.heatmap(pivot_table, annot=True, cmap='viridis')
         plt.show()
 
-    #         sns.barplot(x=col1, y='count', hue=col2, data=df)
-    #         plt.show()
-
-    #         sns.barplot(x=col1, y='count', hue=col2, dodge=True, data=df)
-    #         plt.show()
-
-    #         from statsmodels.graphics.mosaicplot import mosaic
-    #         mosaic(df, [col1, col2])
-    #         plt.show()
-
-    #         g = sns.catplot(x=col1, col=col2, kind='count', data=df)
-    #         plt.show()
-
     else:
         return ("Please input a valid value for col_types, such as cont-cont, cont-cat, or cat-cat")
     return
 
 
-def analyze(col1, col2, col_types=('cont-cont'), plot=False):
+def analyze(col1, col2, col_types='cont-cont', plot=False):
     """
     Analyze the relationship between two columns in a DataFrame.
 
@@ -164,6 +135,10 @@ def analyze(col1, col2, col_types=('cont-cont'), plot=False):
     - The function may return a message if the dataset has less than 15 values after dropping NA rows.
     """
 
+    if not all(col in all_games.columns for col in [col1, col2]):
+        # if they don't have both column names
+        return str(f"One or both column names have not been found, check them for typos: 1st: {col1}, 2nd: {col2}")
+
     # drop all rows with NA values in these two columns
     columns = [col1, col2]
     df = all_games.dropna(subset=columns)
@@ -191,7 +166,7 @@ def analyze(col1, col2, col_types=('cont-cont'), plot=False):
 
     if (plot == True):
         graph(col1, col2, col_types)
-    return
+    return str(f"successfully analyzed relationship - {col_types}")
 
 
 def summary_stats_by_tag(chosen_tag, drop_zeroes=True):
@@ -221,6 +196,10 @@ def summary_stats_by_tag(chosen_tag, drop_zeroes=True):
     and mean prices of the filtered games. Optionally, games with a price of 0 can
     be excluded from the calculation by setting `drop_zeroes` to True.
     """
+
+    if not chosen_tag in tags.columns:
+        return str(f"The tag {chosen_tag} was not found.")
+
     df = tags[tags[chosen_tag] == 1].iloc[:, 0]
     tag_df = all_games[all_games['name'].isin(df)]
 
@@ -342,6 +321,13 @@ def compare_two_tags(tag1, tag2):
     To compare the tags 'Action' and 'Adventure':
     >>> compare_two_tags('Action', 'Adventure')
     """
+
+    if not tag1 in tags.columns:
+        return str(f"The tag {tag1} was not found.")
+
+    if not tag2 in tags.columns:
+        return str(f"The tag {tag2} was not found.")
+
     correlation, p_value = pointbiserialr(tags[tag1], tags[tag2])
     print(f'Correlation coefficient: {correlation}')
     print(f'P-value: {p_value}')
@@ -354,7 +340,7 @@ def compare_two_tags(tag1, tag2):
     plt.xlabel(tag2)
     plt.title('Cross-tabulation Heatmap')
     plt.show()
-    return
+    return str(f"Successfully compared {tag1} and {tag2}")
 
 
 def tags_related_plot(result):
@@ -385,7 +371,8 @@ def tags_related_plot(result):
     To visualize the results for a given list of tag pairs and counts:
     >>> tags_related_plot(result)
     """
-    sns.barplot(x=[f'{pair[0]}-{pair[1]}' for pair, count in result], y=[count for pair, count in result], palette='viridis')
+    sns.barplot(x=[f'{pair[0]}-{pair[1]}' for pair, count in result], y=[count for pair, count in result],
+                palette='viridis')
     plt.xlabel('Tag Pairs')
     plt.ylabel('Count')
     plt.title('Frequency of Tag Pair Combinations')
@@ -430,7 +417,12 @@ def tags_related(num=5, plot=False):
     To analyze and plot the relationships for the top 10 tags:
     >>> tags_related(10, plot=True)
     """
-    df = tags.iloc[:, 1:num]
+    if (num < 2):
+        return str(f"{num} is too small. Please input a number between 2 and 50.")
+    if (num > 50):
+        return str(f"{num} is too large. Please input a number between 2 and 50.")
+
+    df = tags.iloc[:, 1:num + 1]
     tag_names = df.columns
     result = []
 
@@ -449,31 +441,54 @@ def tags_related(num=5, plot=False):
         return result
 
 
-
-def top_n_values(df, column='developers', criteria='price', top_n=5, plot=False):
+def top_n_values(column='developers', criteria='price', top_n=5, plot=False):
     """
-    Get the top producers/developers based on the specified criteria.
+        Generate a summary of the top N values for a specified column based on a given criteria.
 
-    Parameters:
-    - df: pandas DataFrame containing game information.
-    - column: String specifying the desired grouped column (e.g., 'developers', 'genres').
-    - criteria: String specifying the criteria ('price', 'metacritic_score', 'global_sales').
-    - top_n: Number of top producers to retrieve.
-    - plot: Boolean indicating whether to plot the top values on a bar chart.
+        Parameters
+        ----------
+        column : str, optional
+            The column to group and analyze. Default is 'developers'.
+        criteria : str, optional
+            The criteria for analysis. Choose from 'price', 'metacritic_score', 'user_score', or 'global_sales'.
+            Default is 'price'.
+        top_n : int, optional
+            The number of top values to display. Default is 5.
+        plot : bool, optional
+            If True, a bar chart of the top values is plotted. Default is False.
 
-    Returns:
-    - A DataFrame with the top producers/developers based on the specified criteria.
-    
-    Example:
-    - top_n_values(all_games, column='developers', criteria='global_sales', top_n=10, plot=True)
-    
-    """
+        Returns
+        -------
+        pandas.DataFrame
+            A DataFrame containing the top N values for the specified column based on the given criteria.
 
-    if criteria not in ['price', 'metacritic_score', 'user_score', 'global_sales']:
-        raise ValueError("Invalid criteria. Choose from 'price', 'metacritic_score', 'user_score', or 'global_sales'.")
+        Raises
+        ------
+        ValueError
+            If an invalid criteria is provided.
+
+        Examples
+        --------
+        >>> top_n_values(column='developers', criteria='metacritic_score', top_n=10, plot=False)
+        # DataFrame with the top 10 developers based on metacritic_score
+
+        >>> top_n_values(column='publishers', criteria='global_sales', top_n=5, plot=True)
+        # DataFrame with the top 5 publishers based on global_sales, and a corresponding bar chart plot
+
+        Notes
+        -----
+        - The function calculates the mean of the specified criteria for each group in the specified column.
+        - It returns the top N groups based on the mean value of the criteria.
+        - If plot=True, a bar chart is generated to visually represent the top N values.
+
+        """
+
+    df = all_games.copy()
+
+    if criteria not in ['price', 'metacritic_score', 'global_sales']:
+        return str("Invalid criteria. Choose from 'price', 'metacritic_score', or 'global_sales'.")
 
     # Group by developers and calculate the mean for the specified criteria
-    
     grouped_df = df.groupby(column)[criteria].mean()
 
     # Get the top n producers
@@ -493,17 +508,15 @@ def top_n_values(df, column='developers', criteria='price', top_n=5, plot=False)
     return top_group
 
 
-def analyze_single_vs_multiplayer(df):
+def analyze_single_vs_multiplayer():
     """
     Analyze and compare sales and ratings of single-player and multiplayer games.
-
-    Parameters:
-    - df: pandas DataFrame containing game information.
 
     Returns:
     - A DataFrame with the summary statistics for single-player and multiplayer games.
     """
 
+    df = all_games.copy()
     # Filter single-player and multiplayer games
     single_player_games = df[df['single_player'] == True]
     multiplayer_games = df[df['single_player'] == False]
@@ -523,23 +536,23 @@ def analyze_single_vs_multiplayer(df):
     })
 
     # Plot the comparison
-    #plt.figure(figsize=(12, 6))
+    # plt.figure(figsize=(12, 6))
 
     # Sales Comparison
-    #plt.subplot(1, 2, 1)
-    #sns.barplot(x=sales_summary.index, y='mean', hue='index', data=sales_summary.melt(), palette='Set2')
-    #plt.title('Global Sales Comparison')
-    #plt.ylabel('Global Sales')
-    #plt.xlabel('Game Type')
+    # plt.subplot(1, 2, 1)
+    # sns.barplot(x=sales_summary.index, y='mean', hue='index', data=sales_summary.melt(), palette='Set2')
+    # plt.title('Global Sales Comparison')
+    # plt.ylabel('Global Sales')
+    # plt.xlabel('Game Type')
 
     # Ratings Comparison
-    #plt.subplot(1, 2, 2)
-    #sns.barplot(x=ratings_summary.index, y='value', hue='index', data=ratings_summary.melt(), palette='Set2')
-    #plt.title('Ratings Comparison')
-    #plt.ylabel('Average Rating')
-    #plt.xlabel('Game Type')
+    # plt.subplot(1, 2, 2)
+    # sns.barplot(x=ratings_summary.index, y='value', hue='index', data=ratings_summary.melt(), palette='Set2')
+    # plt.title('Ratings Comparison')
+    # plt.ylabel('Average Rating')
+    # plt.xlabel('Game Type')
 
-    #plt.tight_layout()
-    #plt.show()
+    # plt.tight_layout()
+    # plt.show()
 
     return analysis_results
