@@ -23,45 +23,50 @@ Quick Demo
 Below is a quick demo of how to load in data using the package:
 
 .. code-block:: python
-
-    from rfphate import RFPHATE
-    from load_data import *
-    import pkg_resources
     import pandas as pd
+    import numpy as np
+    from scipy.stats import pearsonr
+    from scipy.stats import pointbiserialr
+    import matplotlib.pyplot as plt
+    import seaborn as sns
+    import pkg_resources
+    from SteamInsights import load_data
+    #from rfphate import RFPHATE
+    #from load_data import *
 
-    data = pd.read_csv('datasets/titanic.csv')
-    x, y = dataprep(data)
+    # For all games dataset
+    all_games = load_data()
 
-    rfphate = RFPHATE(y=y, random_state=0)
-    # Alternatively, rfphate = RFPHATE(prediction_type='classification', random_state=0)
+    # For tags dataset
+    tags = load_data('tags')
 
-    embedding = rfphate.fit_transform(x, y)
-    sns.scatterplot(x=embedding[:, 0], y=embedding[:, 1], hue=pd.Categorical(data.iloc[:, 0]))
+    # For ratings dataset
+    ratings = load_data('ratings')
 
-.. image:: figures/titanic.png
+We can visually explore the top values for a category by global sales, ratings, and price. 
 
-We can visually explore the relationships between the response (survival) and other feature variables:
-
-By passenger class:
-
-.. code-block:: python
-
-    sns.scatterplot(x=embedding[:, 0], y=embedding[:, 1], hue=pd.Categorical(data.iloc[:, 1]))
-    plt.legend(title='By Class')
-
-.. image:: figures/titanic_class.png
-
-By passenger sex:
+By developers:
 
 .. code-block:: python
 
-    sns.scatterplot(x=embedding[:, 0], y=embedding[:, 1], hue=pd.Categorical(data.iloc[:, 2]))
-    plt.legend(title='By Sex')
+    top_n_values(column='developers', criteria='global_sales', top_n=6, plot=True)
 
-.. image:: figures/titanic_sex.png
+.. image:: figures/top_n_values_developers.png
 
-If you find the RF-PHATE method useful, please cite:
+By producers:
 
-.. [1] 
-    Rhodes, J.S., Aumon, A., Morin, S., et al.: Gaining Biological Insights through Supervised
-    Data Visualization. bioRxiv (2023). https://doi.org/10.1101/2023.11.22.568384.
+.. code-block:: python
+
+    top_n_values(column='publishers', criteria='global_sales', top_n=6, plot=True)
+
+
+.. image:: figures/top_n_values_publishers.png
+
+
+We can also look at the top combinations of tags:
+
+.. code_block:: python
+
+    tags_related(5, True)
+
+.. image:: figures/tags_related.png
