@@ -65,8 +65,8 @@ By producers:
 
 We can also look at the top combinations of tags:
 
-.. code_block:: python
+.. code-block:: python
 
     tags_related(5, True)
 
-.. image:: figures/tags_related.png
+.. image:: figures/top_tags.png
