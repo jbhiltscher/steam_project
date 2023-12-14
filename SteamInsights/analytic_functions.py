@@ -561,3 +561,87 @@ def analyze_single_vs_multiplayer():
     # plt.show()
 
     return analysis_results
+
+
+def recommend(num_games=5, price_min=0.00, price_max=60.00, tags_to_filter=[],
+              developers=[], publishers=[], players="single/multi", os='windows', reviews='Mixed'):
+    """
+    Recommends a specified number of games based on user-defined metrics.
+
+    Parameters:
+    - num_games (int): Number of games to recommend.
+    - price_min (float): Minimum price filter for games.
+    - price_max (float): Maximum price filter for games.
+    - tags_to_filter (list): List of tags to filter games by.
+    - developers (list): List of developers to filter games by.
+    - publishers (list): List of publishers to filter games by.
+    - players (str): Type of players ('single', 'multi', or 'single/multi').
+    - OS (str): Operating system filter ('windows', 'mac', or 'linux').
+    - reviews (str): Sentiment level to filter games by.
+
+    Returns:
+    - pandas.Series: Series containing the names of the recommended games.
+
+    Example usage:
+    >>> recommend(num_games=10, tags_to_filter=['Action', 'Adventure'])
+    >>> recommend(num_games=10, developers=['Valve'])
+    >>> recommend(num_games=5, publishers=['Valve'])
+    >>> recommend(num_games=10, players="single", os="mac")
+    >>> recommend(num_games=10, reviews="Positive")
+    >>> recommend(num_games=1, price_min=0, price_max=10)
+    """
+
+    # filter all_games by games that appear in the right range:
+    df = all_games[(all_games['price'] >= price_min) & (all_games['price'] <= price_max)]
+
+    # filter priced by games that have these tags
+    if tags_to_filter:
+        tag_filter_condition = tags[tags_to_filter].eq(1).all(axis=1)
+        df = df[df['name'].isin(tags[tag_filter_condition]['name'])]
+
+    # filter by certain developer(s) if not empty
+    if developers:
+        df = df[df['developers'].isin(developers)]
+
+    # filter by certain publisher(s) if not empty
+    if publishers:
+        df = df[df['publishers'].isin(publishers)]
+
+    # filter to the number of players specified
+    if players == "single":
+        df = df[df['players'] == 'single']
+    elif players == "multi":
+        df = df[df['players'] == 'multi']
+    # else do nothing
+
+    # filter to a certain operating system
+    if os == "mac":
+        df = df[df['mac'] == 1]
+    elif os == "linux":
+        df = df[df['linux'] == 1]
+    # else windows --> do nothing
+
+    sentiment_mapping = {
+        'Overwhelmingly Negative': ['Overwhelmingly Negative', 'Mostly Negative', 'Very Negative', 'Negative', 'Mixed',
+                                    'Positive', 'Very Positive', 'Mostly Positive', 'Overwhelmingly Positive'],
+        'Mostly Negative': ['Mostly Negative', 'Very Negative', 'Negative', 'Mixed', 'Positive', 'Very Positive',
+                            'Mostly Positive', 'Overwhelmingly Positive'],
+        'Very Negative': ['Very Negative', 'Negative', 'Mixed', 'Positive', 'Very Positive', 'Mostly Positive',
+                          'Overwhelmingly Positive'],
+        'Negative': ['Negative', 'Mixed', 'Positive', 'Very Positive', 'Mostly Positive', 'Overwhelmingly Positive'],
+        'Mixed': ['Mixed', 'Positive', 'Very Positive', 'Mostly Positive', 'Overwhelmingly Positive'],
+        'Positive': ['Positive', 'Very Positive', 'Mostly Positive', 'Overwhelmingly Positive'],
+        'Very Positive': ['Very Positive', 'Mostly Positive', 'Overwhelmingly Positive'],
+        'Mostly Positive': ['Mostly Positive', 'Overwhelmingly Positive'],
+        'Overwhelmingly Positive': ['Overwhelmingly Positive']
+    }
+
+    sentiment_values = sentiment_mapping.get(reviews, [])
+    df = df[df['all_sentiment'].isin(sentiment_values)]
+
+    df = df.sort_values(by='all_review_number', ascending=False)
+    df = df.drop_duplicates(subset='name')
+
+    return df['name'].head(num_games)
+
+

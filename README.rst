@@ -37,6 +37,12 @@ Below is a quick demo of how to load in data using the package:
     tags = load_data('tags')
     ratings = load_data('ratings')
 
+
+In order to obtain a game recommendation, we can run the following function with the desired metrics:
+.. code-block:: python
+    recommend(num_games=5,price_max=20, tags_to_filter=['Action'], reviews="Positive")
+
+
 We can visually explore the top values for a category by global sales, ratings, and price.
 
 By developers:
