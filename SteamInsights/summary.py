@@ -28,14 +28,8 @@ def game_summary(game_name):
         A DataFrame containing the summary information for the specified game.
         Columns included: 'name', 'publishers', 'developers', 'all_sentiment', 'global_sales', 'release_year.
 
-<<<<<<< HEAD
-    Example
-    -------
-    >>> summary = game_summary('Example Game')
-=======
     Example:
     >>> summary = game_summary('Farming Simulator 17')
->>>>>>> origin/main
     >>> print(summary)
               name       publishers     developers  all_sentiment  global_sales  release_year
     123  Example Game  Example Publisher  Example Dev   Positive       10.5          2020
@@ -62,14 +56,8 @@ def get_sentiment(game_name):
         Columns included: 'name', 'recent_sentiment', 'recent_review_number', 'recent_positive_percentage',
         'all_sentiment', 'all_review_number', 'all_positive_percentage.
 
-<<<<<<< HEAD
-    Example
-    -------
-    >>> sentiment_data = get_sentiment('Example Game')
-=======
     Example:
     >>> sentiment_data = get_sentiment('Farming Simulator 17')
->>>>>>> origin/main
     >>> print(sentiment_data)
               name recent_sentiment  recent_review_number  recent_positive_percentage  all_sentiment  all_review_number  all_positive_percentage
     123  Example Game  Mostly Positive  500                   80.0                         Positive       1000               75.0
@@ -91,21 +79,12 @@ def get_sales_info(game_name):
     - pandas.DataFrame: A DataFrame containing sales details for the specified game.
         Columns included: 'name', 'price', 'estimated_owners', 'global_sales', 'release_year'.
 
-<<<<<<< HEAD
-    Example:
-    >>> sales_data = get_sales_info('Example Game')
-    >>> print(sales_data)
-                name  price  estimated_owners  global_sales  release_year
-    123  Example Game  29.99  5000000           10.5          2020
-    """
-=======
         Example:
         >>> sales_data = get_sales_info('Farming Simulator 17')
         >>> print(sales_data)
                    name  price  estimated_owners  global_sales  release_year
         123  Example Game  29.99  5000000           10.5          2020
         """
->>>>>>> origin/main
 
     sale = all_games[all_games['name'] == game_name]
     sale.reset_index(inplace=True)
