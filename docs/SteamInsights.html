@@ -7,7 +7,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>SteamInsights package &#8212; steam_final 0.0.1 documentation</title>
+    <title>SteamInsights package &#8212; steam_final 1.0.1 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b76e3c8a" />
     <link rel="stylesheet" type="text/css" href="_static/cloud.css?v=f9ae72be" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
@@ -35,7 +35,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="SteamInsights.data package" href="SteamInsights.data.html" />
-    <link rel="prev" title="Welcome to steam_final’s documentation!" href="index.html" /> 
+    <link rel="prev" title="SteamInsights" href="modules.html" /> 
         <meta name="viewport" content="width=device-width, initial-scale=1">
   </head><body>
     <div class="relbar-top">
@@ -53,10 +53,11 @@
           <a href="SteamInsights.data.html" title="SteamInsights.data package"
              accesskey="N">next</a> &nbsp; &nbsp;</li>
         <li class="right" >
-          <a href="index.html" title="Welcome to steam_final’s documentation!"
+          <a href="modules.html" title="SteamInsights"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="index.html">steam_final 0.0.1 documentation</a> &#187;</li>
+    <li><a href="index.html">steam_final 1.0.1 documentation</a> &#187;</li>
 
+          <li class="nav-item nav-item-1"><a href="modules.html" accesskey="U">SteamInsights</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">SteamInsights package</a></li> 
       </ul>
     </div>
@@ -358,7 +359,7 @@ It visualizes the results using a bar plot with tag pairs on the x-axis and coun
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>column</strong> (<em>str</em><em>, </em><em>optional</em>) – The column to group and analyze. Default is ‘developers’.</p></li>
-<li><p><strong>criteria</strong> (<em>str</em><em>, </em><em>optional</em>) – The criteria for analysis. Choose from ‘price’, ‘metacritic_score’, ‘user_score’, or ‘global_sales’.
+<li><p><strong>criteria</strong> (<em>str</em><em>, </em><em>optional</em>) – The criteria for analysis. Choose from ‘price’, ‘metacritic_score’, or ‘global_sales’.
 Default is ‘price’.</p></li>
 <li><p><strong>top_n</strong> (<em>int</em><em>, </em><em>optional</em>) – The number of top values to display. Default is 5.</p></li>
 <li><p><strong>plot</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, a bar chart of the top values is plotted. Default is False.</p></li>
@@ -427,16 +428,10 @@ Default is ‘price’.</p></li>
 <p class="rubric">Notes</p>
 <p>This function generates a summary of games associated with a specified company, including the total number of games,
 the most common sentiment among those games, and information about the price range.</p>
-<p>Parameters:
-- company_name (str): The name of the gaming company to summarize.
-- developer (bool, optional): If True, the function searches for the company in the ‘developers’ column.</p>
-<blockquote>
-<div><p>If False, it searches in the ‘publishers’ column. Default is True.</p>
-</div></blockquote>
-<p>Returns:
-None: The function prints a summary of the company’s presence on Steam.</p>
-<p>Example:
-&gt;&gt;&gt; company_summary(‘Electronic Arts’, False)</p>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">company_summary</span><span class="p">(</span><span class="s1">&#39;Electronic Arts&#39;</span><span class="p">,</span> <span class="n">developer</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py function">
@@ -449,17 +444,17 @@ None: The function prints a summary of the company’s presence on Steam.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>A DataFrame containing the summary information for the specified game.
-Columns included: ‘name’, ‘publishers’, ‘developers’, ‘all_sentiment’, ‘global_sales’, ‘release_year.</p>
+Columns included: ‘name’, ‘publishers’, ‘developers’, ‘all_sentiment’, ‘global_sales’, ‘release_year’.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>pandas.DataFrame</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">summary</span> <span class="o">=</span> <span class="n">game_summary</span><span class="p">(</span><span class="s1">&#39;Example Game&#39;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">summary</span> <span class="o">=</span> <span class="n">game_summary</span><span class="p">(</span><span class="s1">&#39;Farming Simulator 17&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">summary</span><span class="p">)</span>
 <span class="go">          name       publishers     developers  all_sentiment  global_sales  release_year</span>
-<span class="go">123  Example Game  Example Publisher  Example Dev   Positive       10.5          2020</span>
+<span class="go">123  Example Game  Example Publisher  Example Dev       Positive           10.5          2020</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -468,60 +463,75 @@ Columns included: ‘name’, ‘publishers’, ‘developers’, ‘all_sentime
 <dt class="sig sig-object py" id="SteamInsights.summary.get_comp_req">
 <span class="sig-prename descclassname"><span class="pre">SteamInsights.summary.</span></span><span class="sig-name descname"><span class="pre">get_comp_req</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">game_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/SteamInsights/summary.html#get_comp_req"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SteamInsights.summary.get_comp_req" title="Link to this definition">¶</a></dt>
 <dd><p>Retrieve the system requirements for a specified game.</p>
-<p>Parameters:
-- game_name (str): The name of the game for which to retrieve system requirements.</p>
-<p>Returns:
-- pandas.DataFrame: A DataFrame containing system requirements for the specified game.</p>
-<blockquote>
-<div><p>Columns included: ‘name’, ‘windows’, ‘mac’, ‘linux’.</p>
-</div></blockquote>
-<p>Example:
-&gt;&gt;&gt; system_requirements = get_comp_req(‘Example Game’)
-&gt;&gt;&gt; print(system_requirements)</p>
-<blockquote>
-<div><p>name  windows  mac  linux</p>
-</div></blockquote>
-<p>123  Example Game  True  False  True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>game_name</strong> (<em>str</em>) – The name of the game for which to retrieve system requirements.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A DataFrame containing system requirements for the specified game.
+Columns included: ‘name’, ‘windows’, ‘mac’, ‘linux’.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pandas.DataFrame</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">system_requirements</span> <span class="o">=</span> <span class="n">get_comp_req</span><span class="p">(</span><span class="s1">&#39;Farming Simulator 17&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">system_requirements</span><span class="p">)</span>
+<span class="go">          name  windows    mac  linux</span>
+<span class="go">123  Example Game     True  False   True</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="SteamInsights.summary.get_genre">
 <span class="sig-prename descclassname"><span class="pre">SteamInsights.summary.</span></span><span class="sig-name descname"><span class="pre">get_genre</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">game_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/SteamInsights/summary.html#get_genre"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SteamInsights.summary.get_genre" title="Link to this definition">¶</a></dt>
 <dd><p>Retrieve genre information for the specified game.</p>
-<p>Parameters:
-- game_name (str): The name of the game for which to retrieve genre information.</p>
-<p>Returns:
-- pandas.DataFrame: A DataFrame containing genre details for the specified game.</p>
-<blockquote>
-<div><p>Columns included: ‘name’, ‘achievements’, ‘single_player’, ‘categories’, ‘genres’, ‘tags’, ‘popular_tags’.</p>
-</div></blockquote>
-<p>Example:
-&gt;&gt;&gt; genre_data = get_genre(‘Example Game’)
-&gt;&gt;&gt; print(genre_data)</p>
-<blockquote>
-<div><p>name  achievements  single_player  categories         genres                tags            popular_tags</p>
-</div></blockquote>
-<p>123  Example Game  50            True           Action, RPG  Action, RPG, Adventure  Action, Adventure   Open World, Story Rich</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>game_name</strong> (<em>str</em>) – The name of the game for which to retrieve genre information.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A DataFrame containing genre details for the specified game.
+Columns included: ‘name’, ‘achievements’, ‘single_player’, ‘categories’, ‘genres’, ‘tags’, ‘popular_tags’.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pandas.DataFrame</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">genre_data</span> <span class="o">=</span> <span class="n">get_genre</span><span class="p">(</span><span class="s1">&#39;Farming Simulator 17&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">genre_data</span><span class="p">)</span>
+<span class="go">           name  achievements  single_player  categories         genres                tags            popular_tags</span>
+<span class="go">123  Example Game            50           True   Action, RPG  Action, RPG, Adventure  Action, Adventure   Open World, Story Rich</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="SteamInsights.summary.get_sales_info">
 <span class="sig-prename descclassname"><span class="pre">SteamInsights.summary.</span></span><span class="sig-name descname"><span class="pre">get_sales_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">game_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/SteamInsights/summary.html#get_sales_info"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SteamInsights.summary.get_sales_info" title="Link to this definition">¶</a></dt>
 <dd><p>Retrieve sales information for the specified game.</p>
-<p>Parameters:
-- game_name (str): The name of the game for which to retrieve sales information.</p>
-<p>Returns:
-- pandas.DataFrame: A DataFrame containing sales details for the specified game.</p>
-<blockquote>
-<div><p>Columns included: ‘name’, ‘price’, ‘estimated_owners’, ‘global_sales’, ‘release_year’.</p>
-</div></blockquote>
-<p>Example:
-&gt;&gt;&gt; sales_data = get_sales_info(‘Example Game’)
-&gt;&gt;&gt; print(sales_data)</p>
-<blockquote>
-<div><p>name  price  estimated_owners  global_sales  release_year</p>
-</div></blockquote>
-<p>123  Example Game  29.99  5000000           10.5          2020</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>game_name</strong> (<em>str</em>) – The name of the game for which to retrieve sales information.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A DataFrame containing sales details for the specified game.
+Columns included: ‘name’, ‘price’, ‘estimated_owners’, ‘global_sales’, ‘release_year’.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pandas.DataFrame</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sales_data</span> <span class="o">=</span> <span class="n">get_sales_info</span><span class="p">(</span><span class="s1">&#39;Farming Simulator 17&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">sales_data</span><span class="p">)</span>
+<span class="go">          name  price  estimated_owners  global_sales  release_year</span>
+<span class="go">123  Example Game  29.99           5000000          10.5          2020</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py function">
@@ -535,17 +545,17 @@ Columns included: ‘name’, ‘publishers’, ‘developers’, ‘all_sentime
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>A DataFrame containing sentiment details for the specified game.
 Columns included: ‘name’, ‘recent_sentiment’, ‘recent_review_number’, ‘recent_positive_percentage’,
-‘all_sentiment’, ‘all_review_number’, ‘all_positive_percentage.</p>
+‘all_sentiment’, ‘all_review_number’, ‘all_positive_percentage’.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>pandas.DataFrame</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sentiment_data</span> <span class="o">=</span> <span class="n">get_sentiment</span><span class="p">(</span><span class="s1">&#39;Example Game&#39;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sentiment_data</span> <span class="o">=</span> <span class="n">get_sentiment</span><span class="p">(</span><span class="s1">&#39;Farming Simulator 17&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">sentiment_data</span><span class="p">)</span>
-<span class="go">          name recent_sentiment  recent_review_number  recent_positive_percentage  all_sentiment  all_review_number  all_positive_percentage</span>
-<span class="go">123  Example Game  Mostly Positive  500                   80.0                         Positive       1000               75.0</span>
+<span class="go">          name  recent_sentiment  recent_review_number  recent_positive_percentage  all_sentiment  all_review_number  all_positive_percentage</span>
+<span class="go">123  Example Game  Mostly Positive                   500                        80.0       Positive               1000                     75.0</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -554,14 +564,23 @@ Columns included: ‘name’, ‘recent_sentiment’, ‘recent_review_number’
 <dt class="sig sig-object py" id="SteamInsights.summary.get_tags">
 <span class="sig-prename descclassname"><span class="pre">SteamInsights.summary.</span></span><span class="sig-name descname"><span class="pre">get_tags</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">game_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/SteamInsights/summary.html#get_tags"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SteamInsights.summary.get_tags" title="Link to this definition">¶</a></dt>
 <dd><p>Retrieve tags associated with the specified game.</p>
-<p>Parameters:
-- game_name (str): The name of the game for which to retrieve tags.</p>
-<p>Returns:
-- List[str]: A list of tags associated with the specified game.</p>
-<p>Example:
-&gt;&gt;&gt; game_tags = get_tags(‘Example Game’)
-&gt;&gt;&gt; print(game_tags)
-[‘Action’, ‘Adventure’, ‘Classic’, ‘Platformer’]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>game_name</strong> (<em>str</em>) – The name of the game for which to retrieve tags.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A list of tags associated with the specified game.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List[str]</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">game_tags</span> <span class="o">=</span> <span class="n">get_tags</span><span class="p">(</span><span class="s1">&#39;Farming Simulator 17&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">game_tags</span><span class="p">)</span>
+<span class="go">[&#39;Action&#39;, &#39;Adventure&#39;, &#39;Classic&#39;, &#39;Platformer&#39;]</span>
+</pre></div>
+</div>
 </dd></dl>
 
 </section>
@@ -618,8 +637,8 @@ Columns included: ‘name’, ‘recent_sentiment’, ‘recent_review_number’
   </div>
   <div class="sphinxprev">
     <h4>Previous page</h4>
-    <p class="topless"><a href="index.html"
-                          title="Previous page">&larr; Welcome to steam_final’s documentation!</a></p>
+    <p class="topless"><a href="modules.html"
+                          title="Previous page">&larr; SteamInsights</a></p>
   </div>
   <div class="sphinxnext">
     <h4>Next page</h4>
@@ -679,10 +698,11 @@ Columns included: ‘name’, ‘recent_sentiment’, ‘recent_review_number’
           <a href="SteamInsights.data.html" title="SteamInsights.data package"
              >next</a> &nbsp; &nbsp;</li>
         <li class="right" >
-          <a href="index.html" title="Welcome to steam_final’s documentation!"
+          <a href="modules.html" title="SteamInsights"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="index.html">steam_final 0.0.1 documentation</a> &#187;</li>
+    <li><a href="index.html">steam_final 1.0.1 documentation</a> &#187;</li>
 
+          <li class="nav-item nav-item-1"><a href="modules.html" >SteamInsights</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">SteamInsights package</a></li> 
       </ul>
     </div>

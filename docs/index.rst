@@ -4,7 +4,7 @@
    contain the root `toctree` directive.
 
 Welcome to Steam Insights documentation!
-=======================================
+========================================
 
 .. toctree::
    :maxdepth: 4

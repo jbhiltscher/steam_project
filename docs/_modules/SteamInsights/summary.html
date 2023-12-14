@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SteamInsights.summary &#8212; steam_final 0.0.1 documentation</title>
+    <title>SteamInsights.summary &#8212; steam_final 1.0.1 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b76e3c8a" />
     <link rel="stylesheet" type="text/css" href="../../_static/cloud.css?v=f9ae72be" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> &nbsp; &nbsp;</li>
-    <li><a href="../../index.html">steam_final 0.0.1 documentation</a> &#187;</li>
+    <li><a href="../../index.html">steam_final 1.0.1 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">SteamInsights.summary</a></li> 
@@ -75,6 +75,7 @@
 <span class="n">tag_path</span> <span class="o">=</span> <span class="n">pkg_resources</span><span class="o">.</span><span class="n">resource_filename</span><span class="p">(</span><span class="s1">&#39;SteamInsights&#39;</span><span class="p">,</span> <span class="s1">&#39;data/tags.csv&#39;</span><span class="p">)</span>
 <span class="n">tags</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">tag_path</span><span class="p">)</span>
 
+
 <div class="viewcode-block" id="game_summary">
 <a class="viewcode-back" href="../../SteamInsights.html#SteamInsights.summary.game_summary">[docs]</a>
 <span class="k">def</span> <span class="nf">game_summary</span><span class="p">(</span><span class="n">game_name</span><span class="p">):</span>
@@ -90,20 +91,20 @@
 <span class="sd">    -------</span>
 <span class="sd">    pandas.DataFrame</span>
 <span class="sd">        A DataFrame containing the summary information for the specified game.</span>
-<span class="sd">        Columns included: &#39;name&#39;, &#39;publishers&#39;, &#39;developers&#39;, &#39;all_sentiment&#39;, &#39;global_sales&#39;, &#39;release_year.</span>
+<span class="sd">        Columns included: &#39;name&#39;, &#39;publishers&#39;, &#39;developers&#39;, &#39;all_sentiment&#39;, &#39;global_sales&#39;, &#39;release_year&#39;.</span>
 
 <span class="sd">    Example</span>
 <span class="sd">    -------</span>
-<span class="sd">    &gt;&gt;&gt; summary = game_summary(&#39;Example Game&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; summary = game_summary(&#39;Farming Simulator 17&#39;)</span>
 <span class="sd">    &gt;&gt;&gt; print(summary)</span>
 <span class="sd">              name       publishers     developers  all_sentiment  global_sales  release_year</span>
-<span class="sd">    123  Example Game  Example Publisher  Example Dev   Positive       10.5          2020</span>
+<span class="sd">    123  Example Game  Example Publisher  Example Dev       Positive           10.5          2020</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+
 
     <span class="n">summary</span> <span class="o">=</span> <span class="n">all_games</span><span class="p">[</span><span class="n">all_games</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">game_name</span><span class="p">]</span>
     <span class="n">summary</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">summary</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;publishers&#39;</span><span class="p">,</span> <span class="s1">&#39;developers&#39;</span><span class="p">,</span> <span class="s1">&#39;all_sentiment&#39;</span><span class="p">,</span> <span class="s1">&#39;global_sales&#39;</span><span class="p">,</span> <span class="s1">&#39;release_year&#39;</span><span class="p">]]</span></div>
-
 
 
 
@@ -123,16 +124,16 @@
 <span class="sd">    pandas.DataFrame</span>
 <span class="sd">        A DataFrame containing sentiment details for the specified game.</span>
 <span class="sd">        Columns included: &#39;name&#39;, &#39;recent_sentiment&#39;, &#39;recent_review_number&#39;, &#39;recent_positive_percentage&#39;,</span>
-<span class="sd">        &#39;all_sentiment&#39;, &#39;all_review_number&#39;, &#39;all_positive_percentage.</span>
+<span class="sd">        &#39;all_sentiment&#39;, &#39;all_review_number&#39;, &#39;all_positive_percentage&#39;.</span>
 
 <span class="sd">    Example</span>
 <span class="sd">    -------</span>
-<span class="sd">    &gt;&gt;&gt; sentiment_data = get_sentiment(&#39;Example Game&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; sentiment_data = get_sentiment(&#39;Farming Simulator 17&#39;)</span>
 <span class="sd">    &gt;&gt;&gt; print(sentiment_data)</span>
-<span class="sd">              name recent_sentiment  recent_review_number  recent_positive_percentage  all_sentiment  all_review_number  all_positive_percentage</span>
-<span class="sd">    123  Example Game  Mostly Positive  500                   80.0                         Positive       1000               75.0</span>
-<span class="sd">    </span>
+<span class="sd">              name  recent_sentiment  recent_review_number  recent_positive_percentage  all_sentiment  all_review_number  all_positive_percentage</span>
+<span class="sd">    123  Example Game  Mostly Positive                   500                        80.0       Positive               1000                     75.0</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+
 
     <span class="n">sentiment</span> <span class="o">=</span> <span class="n">all_games</span><span class="p">[</span><span class="n">all_games</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">game_name</span><span class="p">]</span>
     <span class="k">return</span> <span class="n">sentiment</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;recent_sentiment&#39;</span><span class="p">,</span> <span class="s1">&#39;recent_review_number&#39;</span><span class="p">,</span> <span class="s1">&#39;recent_positive_percentage&#39;</span><span class="p">,</span> <span class="s1">&#39;all_sentiment&#39;</span><span class="p">,</span> <span class="s1">&#39;all_review_number&#39;</span><span class="p">,</span> <span class="s1">&#39;all_positive_percentage&#39;</span> <span class="p">]]</span></div>
@@ -145,19 +146,25 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Retrieve sales information for the specified game.</span>
 
-<span class="sd">    Parameters:</span>
-<span class="sd">    - game_name (str): The name of the game for which to retrieve sales information.</span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    game_name : str</span>
+<span class="sd">        The name of the game for which to retrieve sales information.</span>
 
-<span class="sd">    Returns:</span>
-<span class="sd">    - pandas.DataFrame: A DataFrame containing sales details for the specified game.</span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    pandas.DataFrame</span>
+<span class="sd">        A DataFrame containing sales details for the specified game.</span>
 <span class="sd">        Columns included: &#39;name&#39;, &#39;price&#39;, &#39;estimated_owners&#39;, &#39;global_sales&#39;, &#39;release_year&#39;.</span>
 
-<span class="sd">    Example:</span>
-<span class="sd">    &gt;&gt;&gt; sales_data = get_sales_info(&#39;Example Game&#39;)</span>
+<span class="sd">    Example</span>
+<span class="sd">    -------</span>
+<span class="sd">    &gt;&gt;&gt; sales_data = get_sales_info(&#39;Farming Simulator 17&#39;)</span>
 <span class="sd">    &gt;&gt;&gt; print(sales_data)</span>
-<span class="sd">                name  price  estimated_owners  global_sales  release_year</span>
-<span class="sd">    123  Example Game  29.99  5000000           10.5          2020</span>
+<span class="sd">              name  price  estimated_owners  global_sales  release_year</span>
+<span class="sd">    123  Example Game  29.99           5000000          10.5          2020</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+
 
     <span class="n">sale</span> <span class="o">=</span> <span class="n">all_games</span><span class="p">[</span><span class="n">all_games</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">game_name</span><span class="p">]</span>
     <span class="n">sale</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -171,19 +178,25 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Retrieve genre information for the specified game.</span>
 
-<span class="sd">    Parameters:</span>
-<span class="sd">    - game_name (str): The name of the game for which to retrieve genre information.</span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    game_name : str</span>
+<span class="sd">        The name of the game for which to retrieve genre information.</span>
 
-<span class="sd">    Returns:</span>
-<span class="sd">    - pandas.DataFrame: A DataFrame containing genre details for the specified game.</span>
-<span class="sd">      Columns included: &#39;name&#39;, &#39;achievements&#39;, &#39;single_player&#39;, &#39;categories&#39;, &#39;genres&#39;, &#39;tags&#39;, &#39;popular_tags&#39;.</span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    pandas.DataFrame</span>
+<span class="sd">        A DataFrame containing genre details for the specified game.</span>
+<span class="sd">        Columns included: &#39;name&#39;, &#39;achievements&#39;, &#39;single_player&#39;, &#39;categories&#39;, &#39;genres&#39;, &#39;tags&#39;, &#39;popular_tags&#39;.</span>
 
-<span class="sd">    Example:</span>
-<span class="sd">    &gt;&gt;&gt; genre_data = get_genre(&#39;Example Game&#39;)</span>
+<span class="sd">    Example</span>
+<span class="sd">    -------</span>
+<span class="sd">    &gt;&gt;&gt; genre_data = get_genre(&#39;Farming Simulator 17&#39;)</span>
 <span class="sd">    &gt;&gt;&gt; print(genre_data)</span>
 <span class="sd">               name  achievements  single_player  categories         genres                tags            popular_tags</span>
-<span class="sd">    123  Example Game  50            True           Action, RPG  Action, RPG, Adventure  Action, Adventure   Open World, Story Rich</span>
+<span class="sd">    123  Example Game            50           True   Action, RPG  Action, RPG, Adventure  Action, Adventure   Open World, Story Rich</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+
 
     <span class="n">genres</span> <span class="o">=</span> <span class="n">all_games</span><span class="p">[</span><span class="n">all_games</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">game_name</span><span class="p">]</span>
     <span class="n">genres</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -197,23 +210,27 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Retrieve tags associated with the specified game.</span>
 
-<span class="sd">    Parameters:</span>
-<span class="sd">    - game_name (str): The name of the game for which to retrieve tags.</span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    game_name : str</span>
+<span class="sd">        The name of the game for which to retrieve tags.</span>
 
-<span class="sd">    Returns:</span>
-<span class="sd">    - List[str]: A list of tags associated with the specified game.</span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    List[str]</span>
+<span class="sd">        A list of tags associated with the specified game.</span>
 
-<span class="sd">    Example:</span>
-<span class="sd">    &gt;&gt;&gt; game_tags = get_tags(&#39;Example Game&#39;)</span>
+<span class="sd">    Example</span>
+<span class="sd">    -------</span>
+<span class="sd">    &gt;&gt;&gt; game_tags = get_tags(&#39;Farming Simulator 17&#39;)</span>
 <span class="sd">    &gt;&gt;&gt; print(game_tags)</span>
 <span class="sd">    [&#39;Action&#39;, &#39;Adventure&#39;, &#39;Classic&#39;, &#39;Platformer&#39;]</span>
-
 <span class="sd">    &quot;&quot;&quot;</span>
+
 
     <span class="n">game_tags</span> <span class="o">=</span> <span class="n">tags</span><span class="p">[</span><span class="n">tags</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">game_name</span><span class="p">]</span>
     <span class="n">game_tags</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">game_tags</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="n">game_tags</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span></div>
-
 
 
 
@@ -223,19 +240,25 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Retrieve the system requirements for a specified game.</span>
 
-<span class="sd">    Parameters:</span>
-<span class="sd">    - game_name (str): The name of the game for which to retrieve system requirements.</span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    game_name : str</span>
+<span class="sd">        The name of the game for which to retrieve system requirements.</span>
 
-<span class="sd">    Returns:</span>
-<span class="sd">    - pandas.DataFrame: A DataFrame containing system requirements for the specified game.</span>
-<span class="sd">      Columns included: &#39;name&#39;, &#39;windows&#39;, &#39;mac&#39;, &#39;linux&#39;.</span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    pandas.DataFrame</span>
+<span class="sd">        A DataFrame containing system requirements for the specified game.</span>
+<span class="sd">        Columns included: &#39;name&#39;, &#39;windows&#39;, &#39;mac&#39;, &#39;linux&#39;.</span>
 
-<span class="sd">    Example:</span>
-<span class="sd">    &gt;&gt;&gt; system_requirements = get_comp_req(&#39;Example Game&#39;)</span>
+<span class="sd">    Example</span>
+<span class="sd">    -------</span>
+<span class="sd">    &gt;&gt;&gt; system_requirements = get_comp_req(&#39;Farming Simulator 17&#39;)</span>
 <span class="sd">    &gt;&gt;&gt; print(system_requirements)</span>
-<span class="sd">          name  windows  mac  linux</span>
-<span class="sd">    123  Example Game  True  False  True</span>
+<span class="sd">              name  windows    mac  linux</span>
+<span class="sd">    123  Example Game     True  False   True</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+
 
     <span class="n">requirements</span> <span class="o">=</span> <span class="n">all_games</span><span class="p">[</span><span class="n">all_games</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">game_name</span><span class="p">]</span>
     <span class="n">requirements</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -265,17 +288,12 @@
 <span class="sd">    This function generates a summary of games associated with a specified company, including the total number of games,</span>
 <span class="sd">    the most common sentiment among those games, and information about the price range.</span>
 
-<span class="sd">    Parameters:</span>
-<span class="sd">    - company_name (str): The name of the gaming company to summarize.</span>
-<span class="sd">    - developer (bool, optional): If True, the function searches for the company in the &#39;developers&#39; column.</span>
-<span class="sd">                                  If False, it searches in the &#39;publishers&#39; column. Default is True.</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">    None: The function prints a summary of the company&#39;s presence on Steam.</span>
-
-<span class="sd">    Example:</span>
-<span class="sd">    &gt;&gt;&gt; company_summary(&#39;Electronic Arts&#39;, False)</span>
+<span class="sd">    Example</span>
+<span class="sd">    -------</span>
+<span class="sd">    &gt;&gt;&gt; company_summary(&#39;Electronic Arts&#39;, developer=False)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+
+    
     <span class="c1"># Check if there are rows for both &#39;developers&#39; and &#39;publishers&#39;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">all_games</span><span class="p">[(</span><span class="n">all_games</span><span class="p">[</span><span class="s1">&#39;developers&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">company_name</span><span class="p">,</span> <span class="n">na</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span> <span class="o">&amp;</span>
                      <span class="p">(</span><span class="n">all_games</span><span class="p">[</span><span class="s1">&#39;publishers&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">company_name</span><span class="p">,</span> <span class="n">na</span><span class="o">=</span><span class="kc">False</span><span class="p">))]</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
@@ -369,7 +387,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> &nbsp; &nbsp;</li>
-    <li><a href="../../index.html">steam_final 0.0.1 documentation</a> &#187;</li>
+    <li><a href="../../index.html">steam_final 1.0.1 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">SteamInsights.summary</a></li> 
