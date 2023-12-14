@@ -12,6 +12,7 @@ all_games = pd.read_csv(data_path)
 tag_path = pkg_resources.resource_filename('SteamInsights', 'data/tags.csv')
 tags = pd.read_csv(tag_path)
 
+
 def game_summary(game_name):
     """
     Retrieve a summary of the specified game.
@@ -27,9 +28,14 @@ def game_summary(game_name):
         A DataFrame containing the summary information for the specified game.
         Columns included: 'name', 'publishers', 'developers', 'all_sentiment', 'global_sales', 'release_year.
 
+<<<<<<< HEAD
     Example
     -------
     >>> summary = game_summary('Example Game')
+=======
+    Example:
+    >>> summary = game_summary('Farming Simulator 17')
+>>>>>>> origin/main
     >>> print(summary)
               name       publishers     developers  all_sentiment  global_sales  release_year
     123  Example Game  Example Publisher  Example Dev   Positive       10.5          2020
@@ -38,7 +44,6 @@ def game_summary(game_name):
     summary = all_games[all_games['name'] == game_name]
     summary.reset_index(inplace=True)
     return summary.loc[:, ['name', 'publishers', 'developers', 'all_sentiment', 'global_sales', 'release_year']]
-
 
 
 def get_sentiment(game_name):
@@ -57,9 +62,14 @@ def get_sentiment(game_name):
         Columns included: 'name', 'recent_sentiment', 'recent_review_number', 'recent_positive_percentage',
         'all_sentiment', 'all_review_number', 'all_positive_percentage.
 
+<<<<<<< HEAD
     Example
     -------
     >>> sentiment_data = get_sentiment('Example Game')
+=======
+    Example:
+    >>> sentiment_data = get_sentiment('Farming Simulator 17')
+>>>>>>> origin/main
     >>> print(sentiment_data)
               name recent_sentiment  recent_review_number  recent_positive_percentage  all_sentiment  all_review_number  all_positive_percentage
     123  Example Game  Mostly Positive  500                   80.0                         Positive       1000               75.0
@@ -81,12 +91,21 @@ def get_sales_info(game_name):
     - pandas.DataFrame: A DataFrame containing sales details for the specified game.
         Columns included: 'name', 'price', 'estimated_owners', 'global_sales', 'release_year'.
 
+<<<<<<< HEAD
     Example:
     >>> sales_data = get_sales_info('Example Game')
     >>> print(sales_data)
                 name  price  estimated_owners  global_sales  release_year
     123  Example Game  29.99  5000000           10.5          2020
     """
+=======
+        Example:
+        >>> sales_data = get_sales_info('Farming Simulator 17')
+        >>> print(sales_data)
+                   name  price  estimated_owners  global_sales  release_year
+        123  Example Game  29.99  5000000           10.5          2020
+        """
+>>>>>>> origin/main
 
     sale = all_games[all_games['name'] == game_name]
     sale.reset_index(inplace=True)
@@ -105,7 +124,7 @@ def get_genre(game_name):
       Columns included: 'name', 'achievements', 'single_player', 'categories', 'genres', 'tags', 'popular_tags'.
 
     Example:
-    >>> genre_data = get_genre('Example Game')
+    >>> genre_data = get_genre('Farming Simulator 17')
     >>> print(genre_data)
                name  achievements  single_player  categories         genres                tags            popular_tags
     123  Example Game  50            True           Action, RPG  Action, RPG, Adventure  Action, Adventure   Open World, Story Rich
@@ -127,7 +146,7 @@ def get_tags(game_name):
     - List[str]: A list of tags associated with the specified game.
 
     Example:
-    >>> game_tags = get_tags('Example Game')
+    >>> game_tags = get_tags('Farming Simulator 17')
     >>> print(game_tags)
     ['Action', 'Adventure', 'Classic', 'Platformer']
 
@@ -136,7 +155,6 @@ def get_tags(game_name):
     game_tags = tags[tags['name'] == game_name]
     game_tags.reset_index(inplace=True)
     return game_tags.columns[game_tags.iloc[0] == 1].tolist()
-
 
 
 def get_comp_req(game_name):
@@ -151,7 +169,7 @@ def get_comp_req(game_name):
       Columns included: 'name', 'windows', 'mac', 'linux'.
 
     Example:
-    >>> system_requirements = get_comp_req('Example Game')
+    >>> system_requirements = get_comp_req('Farming Simulator 17')
     >>> print(system_requirements)
           name  windows  mac  linux
     123  Example Game  True  False  True

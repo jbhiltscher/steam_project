@@ -455,7 +455,7 @@ def top_n_values(column='developers', criteria='price', top_n=5, plot=False):
         column : str, optional
             The column to group and analyze. Default is 'developers'.
         criteria : str, optional
-            The criteria for analysis. Choose from 'price', 'metacritic_score', 'user_score', or 'global_sales'.
+            The criteria for analysis. Choose from 'price', 'metacritic_score', or 'global_sales'.
             Default is 'price'.
         top_n : int, optional
             The number of top values to display. Default is 5.
