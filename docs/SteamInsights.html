@@ -86,6 +86,7 @@
 </section>
 <section id="module-SteamInsights.analytic_functions">
 <span id="steaminsights-analytic-functions-module"></span><h2>SteamInsights.analytic_functions module<a class="headerlink" href="#module-SteamInsights.analytic_functions" title="Link to this heading">¶</a></h2>
+<p>These are functions to use for analyzing and visualizing the steam dataset.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="SteamInsights.analytic_functions.analyze">
 <span class="sig-prename descclassname"><span class="pre">SteamInsights.analytic_functions.</span></span><span class="sig-name descname"><span class="pre">analyze</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">col1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col_types</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cont-cont'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/SteamInsights/analytic_functions.html#analyze"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SteamInsights.analytic_functions.analyze" title="Link to this definition">¶</a></dt>
@@ -128,10 +129,8 @@ Otherwise, None is returned.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="SteamInsights.analytic_functions.analyze_single_vs_multiplayer">
-<span class="sig-prename descclassname"><span class="pre">SteamInsights.analytic_functions.</span></span><span class="sig-name descname"><span class="pre">analyze_single_vs_multiplayer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/SteamInsights/analytic_functions.html#analyze_single_vs_multiplayer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SteamInsights.analytic_functions.analyze_single_vs_multiplayer" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">SteamInsights.analytic_functions.</span></span><span class="sig-name descname"><span class="pre">analyze_single_vs_multiplayer</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/SteamInsights/analytic_functions.html#analyze_single_vs_multiplayer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SteamInsights.analytic_functions.analyze_single_vs_multiplayer" title="Link to this definition">¶</a></dt>
 <dd><p>Analyze and compare sales and ratings of single-player and multiplayer games.</p>
-<p>Parameters:
-- df: pandas DataFrame containing game information.</p>
 <p>Returns:
 - A DataFrame with the summary statistics for single-player and multiplayer games.</p>
 </dd></dl>
@@ -240,6 +239,31 @@ The plot displays the mean prices on the y-axis and tag names on the x-axis.</p>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="SteamInsights.analytic_functions.recommend">
+<span class="sig-prename descclassname"><span class="pre">SteamInsights.analytic_functions.</span></span><span class="sig-name descname"><span class="pre">recommend</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_games</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">price_min</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">price_max</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">60.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tags_to_filter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">developers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">publishers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">players</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'single/multi'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">os</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'windows'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reviews</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Mixed'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/SteamInsights/analytic_functions.html#recommend"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SteamInsights.analytic_functions.recommend" title="Link to this definition">¶</a></dt>
+<dd><p>Recommends a specified number of games based on user-defined metrics.</p>
+<p>Parameters:
+- num_games (int): Number of games to recommend.
+- price_min (float): Minimum price filter for games.
+- price_max (float): Maximum price filter for games.
+- tags_to_filter (list): List of tags to filter games by.
+- developers (list): List of developers to filter games by.
+- publishers (list): List of publishers to filter games by.
+- players (str): Type of players (‘single’, ‘multi’, or ‘single/multi’).
+- OS (str): Operating system filter (‘windows’, ‘mac’, or ‘linux’).
+- reviews (str): Sentiment level to filter games by.</p>
+<p>Returns:
+- pandas.Series: Series containing the names of the recommended games.</p>
+<p>Example usage:
+&gt;&gt;&gt; recommend(num_games=10, tags_to_filter=[‘Action’, ‘Adventure’])
+&gt;&gt;&gt; recommend(num_games=10, developers=[‘Valve’])
+&gt;&gt;&gt; recommend(num_games=5, publishers=[‘Valve’])
+&gt;&gt;&gt; recommend(num_games=10, players=”single”, os=”mac”)
+&gt;&gt;&gt; recommend(num_games=10, reviews=”Positive”)
+&gt;&gt;&gt; recommend(num_games=1, price_min=0, price_max=10)</p>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="SteamInsights.analytic_functions.summary_stats_by_tag">
 <span class="sig-prename descclassname"><span class="pre">SteamInsights.analytic_functions.</span></span><span class="sig-name descname"><span class="pre">summary_stats_by_tag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chosen_tag</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">drop_zeroes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/SteamInsights/analytic_functions.html#summary_stats_by_tag"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SteamInsights.analytic_functions.summary_stats_by_tag" title="Link to this definition">¶</a></dt>
 <dd><p>Calculate summary statistics (min, max, mean) for the prices of games associated with a specified tag.</p>
@@ -316,7 +340,7 @@ If <cite>plot</cite> is True, the function also calls <cite>tags_related_plot</c
 </dl>
 <p class="rubric">Notes</p>
 <p>This function is meant to be used in tandem with the tags_related(num, plot) function when plot is set
-to true and should not be called manually by the user. It takes in a the result of tags_related(), which
+to true and should not be called manually by the user. It takes in the result of tags_related(), which
 is a list of tuples, where each tuple contains a tag pair and the count of ones in the cross-tabulation.
 It visualizes the results using a bar plot with tag pairs on the x-axis and counts on the y-axis.</p>
 <p>Parameters:
@@ -328,18 +352,43 @@ It visualizes the results using a bar plot with tag pairs on the x-axis and coun
 
 <dl class="py function">
 <dt class="sig sig-object py" id="SteamInsights.analytic_functions.top_n_values">
-<span class="sig-prename descclassname"><span class="pre">SteamInsights.analytic_functions.</span></span><span class="sig-name descname"><span class="pre">top_n_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'developers'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">criteria</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'price'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">top_n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/SteamInsights/analytic_functions.html#top_n_values"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SteamInsights.analytic_functions.top_n_values" title="Link to this definition">¶</a></dt>
-<dd><p>Get the top producers/developers based on the specified criteria.</p>
-<p>Parameters:
-- df: pandas DataFrame containing game information.
-- column: String specifying the desired grouped column (e.g., ‘developers’, ‘genres’).
-- criteria: String specifying the criteria (‘price’, ‘metacritic_score’, ‘global_sales’).
-- top_n: Number of top producers to retrieve.
-- plot: Boolean indicating whether to plot the top values on a bar chart.</p>
-<p>Returns:
-- A DataFrame with the top producers/developers based on the specified criteria.</p>
-<p>Example:
-- top_n_values(all_games, column=’developers’, criteria=’global_sales’, top_n=10, plot=True)</p>
+<span class="sig-prename descclassname"><span class="pre">SteamInsights.analytic_functions.</span></span><span class="sig-name descname"><span class="pre">top_n_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'developers'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">criteria</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'price'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">top_n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/SteamInsights/analytic_functions.html#top_n_values"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SteamInsights.analytic_functions.top_n_values" title="Link to this definition">¶</a></dt>
+<dd><p>Generate a summary of the top N values for a specified column based on a given criteria.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>column</strong> (<em>str</em><em>, </em><em>optional</em>) – The column to group and analyze. Default is ‘developers’.</p></li>
+<li><p><strong>criteria</strong> (<em>str</em><em>, </em><em>optional</em>) – The criteria for analysis. Choose from ‘price’, ‘metacritic_score’, ‘user_score’, or ‘global_sales’.
+Default is ‘price’.</p></li>
+<li><p><strong>top_n</strong> (<em>int</em><em>, </em><em>optional</em>) – The number of top values to display. Default is 5.</p></li>
+<li><p><strong>plot</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, a bar chart of the top values is plotted. Default is False.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A DataFrame containing the top N values for the specified column based on the given criteria.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pandas.DataFrame</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If an invalid criteria is provided.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">top_n_values</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s1">&#39;developers&#39;</span><span class="p">,</span> <span class="n">criteria</span><span class="o">=</span><span class="s1">&#39;metacritic_score&#39;</span><span class="p">,</span> <span class="n">top_n</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="go"># DataFrame with the top 10 developers based on metacritic_score</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">top_n_values</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s1">&#39;publishers&#39;</span><span class="p">,</span> <span class="n">criteria</span><span class="o">=</span><span class="s1">&#39;global_sales&#39;</span><span class="p">,</span> <span class="n">top_n</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go"># DataFrame with the top 5 publishers based on global_sales, and a corresponding bar chart plot</span>
+</pre></div>
+</div>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>The function calculates the mean of the specified criteria for each group in the specified column.</p></li>
+<li><p>It returns the top N groups based on the mean value of the criteria.</p></li>
+<li><p>If plot=True, a bar chart is generated to visually represent the top N values.</p></li>
+</ul>
 </dd></dl>
 
 </section>
@@ -349,6 +398,7 @@ It visualizes the results using a bar plot with tag pairs on the x-axis and coun
 </section>
 <section id="module-SteamInsights.load_data">
 <span id="steaminsights-load-data-module"></span><h2>SteamInsights.load_data module<a class="headerlink" href="#module-SteamInsights.load_data" title="Link to this heading">¶</a></h2>
+<p>This script loads the raw data for the games, tags, and ratings files.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="SteamInsights.load_data.load_data">
 <span class="sig-prename descclassname"><span class="pre">SteamInsights.load_data.</span></span><span class="sig-name descname"><span class="pre">load_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'all_games'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/SteamInsights/load_data.html#load_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SteamInsights.load_data.load_data" title="Link to this definition">¶</a></dt>
@@ -358,6 +408,7 @@ It visualizes the results using a bar plot with tag pairs on the x-axis and coun
 </section>
 <section id="module-SteamInsights.summary">
 <span id="steaminsights-summary-module"></span><h2>SteamInsights.summary module<a class="headerlink" href="#module-SteamInsights.summary" title="Link to this heading">¶</a></h2>
+<p>These are functions to use for generating summary statistics for games and producers by various metrics.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="SteamInsights.summary.company_summary">
 <span class="sig-prename descclassname"><span class="pre">SteamInsights.summary.</span></span><span class="sig-name descname"><span class="pre">company_summary</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">company_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">developer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/SteamInsights/summary.html#company_summary"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SteamInsights.summary.company_summary" title="Link to this definition">¶</a></dt>
@@ -365,12 +416,8 @@ It visualizes the results using a bar plot with tag pairs on the x-axis and coun
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>company_name</strong> (<em>str</em>) – </p></li>
-<li><p><strong>summary.</strong> (<em>- The name</em><em> of </em><em>the company for which to generate the</em>) – </p></li>
-<li><p><strong>developer</strong> (<em>bool</em><em>, </em><em>optional</em>) – </p></li>
-<li><p><strong>True</strong> (<em>- If</em>) – </p></li>
-<li><p><strong>False</strong> (<em>consider games developed by the company. If</em>) – </p></li>
-<li><p><strong>True.</strong> (<em>consider games published by the company. Default is</em>) – </p></li>
+<li><p><strong>company_name</strong> (<em>str</em>) – The name of the company for which to generate the summary.</p></li>
+<li><p><strong>developer</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, consider games developed by the company. If False, consider games published by the company. Default is True.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
@@ -381,12 +428,14 @@ It visualizes the results using a bar plot with tag pairs on the x-axis and coun
 <p>This function generates a summary of games associated with a specified company, including the total number of games,
 the most common sentiment among those games, and information about the price range.</p>
 <p>Parameters:
-- company_name (str): The name of the company for which to generate the summary.
-- developer (bool, optional): If True, consider games developed by the company. If False, consider games published by the company. Default is True.</p>
-<p class="rubric">Examples</p>
-<p>To generate a summary for games developed by Rockstar Games:
-&gt;&gt;&gt; company_summary(‘Rockstar Games’, True)</p>
-<p>To generate a summary for games published by Electronic Arts:
+- company_name (str): The name of the gaming company to summarize.
+- developer (bool, optional): If True, the function searches for the company in the ‘developers’ column.</p>
+<blockquote>
+<div><p>If False, it searches in the ‘publishers’ column. Default is True.</p>
+</div></blockquote>
+<p>Returns:
+None: The function prints a summary of the company’s presence on Steam.</p>
+<p>Example:
 &gt;&gt;&gt; company_summary(‘Electronic Arts’, False)</p>
 </dd></dl>
 
@@ -539,6 +588,7 @@ Columns included: ‘name’, ‘recent_sentiment’, ‘recent_review_number’
 <li><a class="reference internal" href="#SteamInsights.analytic_functions.compare_two_tags"><code class="docutils literal notranslate"><span class="pre">compare_two_tags()</span></code></a></li>
 <li><a class="reference internal" href="#SteamInsights.analytic_functions.graph"><code class="docutils literal notranslate"><span class="pre">graph()</span></code></a></li>
 <li><a class="reference internal" href="#SteamInsights.analytic_functions.graph_mean_tag_prices"><code class="docutils literal notranslate"><span class="pre">graph_mean_tag_prices()</span></code></a></li>
+<li><a class="reference internal" href="#SteamInsights.analytic_functions.recommend"><code class="docutils literal notranslate"><span class="pre">recommend()</span></code></a></li>
 <li><a class="reference internal" href="#SteamInsights.analytic_functions.summary_stats_by_tag"><code class="docutils literal notranslate"><span class="pre">summary_stats_by_tag()</span></code></a></li>
 <li><a class="reference internal" href="#SteamInsights.analytic_functions.tags_related"><code class="docutils literal notranslate"><span class="pre">tags_related()</span></code></a></li>
 <li><a class="reference internal" href="#SteamInsights.analytic_functions.tags_related_plot"><code class="docutils literal notranslate"><span class="pre">tags_related_plot()</span></code></a></li>

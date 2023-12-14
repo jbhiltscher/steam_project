@@ -61,14 +61,17 @@
           <div class="body" role="main">
             
   <h1>Source code for SteamInsights.analytic_functions</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">These are functions to use for analyzing and visualizing the steam dataset.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">pearsonr</span>
 <span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">pointbiserialr</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
 <span class="kn">import</span> <span class="nn">pkg_resources</span>
-
 
 <span class="n">data_path</span> <span class="o">=</span> <span class="n">pkg_resources</span><span class="o">.</span><span class="n">resource_filename</span><span class="p">(</span><span class="s1">&#39;SteamInsights&#39;</span><span class="p">,</span> <span class="s1">&#39;data/all_games_cleaned.csv&#39;</span><span class="p">)</span>
 <span class="n">all_games</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">data_path</span><span class="p">)</span>
@@ -116,14 +119,11 @@
     <span class="n">df</span> <span class="o">=</span> <span class="n">all_games</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="n">columns</span><span class="p">)</span>
     <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="n">columns</span><span class="p">]</span>
 
-    <span class="c1"># if the length of the df is now less than 20, it might be wrong to analyse the relationship?</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">15</span><span class="p">):</span>
+    <span class="c1"># if the length of the df is now less than 15, it might be wrong to analyse the relationship?</span>
+    <span class="k">if</span> <span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">15</span><span class="p">:</span>
         <span class="k">return</span> <span class="p">(</span><span class="s2">&quot;This relationship has less than 15 values to analyze&quot;</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="p">(</span><span class="n">col_types</span> <span class="o">==</span> <span class="s1">&#39;cont-cont&#39;</span><span class="p">):</span>
-        <span class="c1">#         sns.scatterplot(x=col1, y=col2, data=df)</span>
-        <span class="c1">#         plt.show()</span>
-
         <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
         <span class="n">sns</span><span class="o">.</span><span class="n">jointplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">col1</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">col2</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
@@ -142,25 +142,13 @@
         <span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">col2</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">col1</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
-        <span class="c1">#         sns.violinplot(x=col2, y=col1, data=df)</span>
-        <span class="c1">#         plt.show()</span>
-
         <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
         <span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">col2</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">col1</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
-        <span class="c1">#         sns.pointplot(x=col2, y=col1, data=df)</span>
-        <span class="c1">#         plt.show()</span>
-
-        <span class="c1">#         sns.swarmplot(x=col2, y=col1, data=df)</span>
-        <span class="c1">#         plt.show()</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
         <span class="n">sns</span><span class="o">.</span><span class="n">countplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">col2</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-
-    <span class="c1">#         g = sns.FacetGrid(df, col=col2)</span>
-    <span class="c1">#         g.map(sns.histplot, col1)</span>
-    <span class="c1">#         plt.show()</span>
 
     <span class="k">elif</span> <span class="p">(</span><span class="n">col_types</span> <span class="o">==</span> <span class="s1">&#39;cat-cat&#39;</span><span class="p">):</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
@@ -172,19 +160,6 @@
         <span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">pivot_table</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
-    <span class="c1">#         sns.barplot(x=col1, y=&#39;count&#39;, hue=col2, data=df)</span>
-    <span class="c1">#         plt.show()</span>
-
-    <span class="c1">#         sns.barplot(x=col1, y=&#39;count&#39;, hue=col2, dodge=True, data=df)</span>
-    <span class="c1">#         plt.show()</span>
-
-    <span class="c1">#         from statsmodels.graphics.mosaicplot import mosaic</span>
-    <span class="c1">#         mosaic(df, [col1, col2])</span>
-    <span class="c1">#         plt.show()</span>
-
-    <span class="c1">#         g = sns.catplot(x=col1, col=col2, kind=&#39;count&#39;, data=df)</span>
-    <span class="c1">#         plt.show()</span>
-
     <span class="k">else</span><span class="p">:</span>
         <span class="k">return</span> <span class="p">(</span><span class="s2">&quot;Please input a valid value for col_types, such as cont-cont, cont-cat, or cat-cat&quot;</span><span class="p">)</span>
     <span class="k">return</span></div>
@@ -193,7 +168,7 @@
 
 <div class="viewcode-block" id="analyze">
 <a class="viewcode-back" href="../../SteamInsights.html#SteamInsights.analytic_functions.analyze">[docs]</a>
-<span class="k">def</span> <span class="nf">analyze</span><span class="p">(</span><span class="n">col1</span><span class="p">,</span> <span class="n">col2</span><span class="p">,</span> <span class="n">col_types</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;cont-cont&#39;</span><span class="p">),</span> <span class="n">plot</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">analyze</span><span class="p">(</span><span class="n">col1</span><span class="p">,</span> <span class="n">col2</span><span class="p">,</span> <span class="n">col_types</span><span class="o">=</span><span class="s1">&#39;cont-cont&#39;</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Analyze the relationship between two columns in a DataFrame.</span>
 
@@ -232,6 +207,10 @@
 <span class="sd">    - The function may return a message if the dataset has less than 15 values after dropping NA rows.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="n">col</span> <span class="ow">in</span> <span class="n">all_games</span><span class="o">.</span><span class="n">columns</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="p">[</span><span class="n">col1</span><span class="p">,</span> <span class="n">col2</span><span class="p">]):</span>
+        <span class="c1"># if they don&#39;t have both column names</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;One or both column names have not been found, check them for typos: 1st: </span><span class="si">{</span><span class="n">col1</span><span class="si">}</span><span class="s2">, 2nd: </span><span class="si">{</span><span class="n">col2</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
     <span class="c1"># drop all rows with NA values in these two columns</span>
     <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="n">col1</span><span class="p">,</span> <span class="n">col2</span><span class="p">]</span>
     <span class="n">df</span> <span class="o">=</span> <span class="n">all_games</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="n">columns</span><span class="p">)</span>
@@ -259,7 +238,7 @@
 
     <span class="k">if</span> <span class="p">(</span><span class="n">plot</span> <span class="o">==</span> <span class="kc">True</span><span class="p">):</span>
         <span class="n">graph</span><span class="p">(</span><span class="n">col1</span><span class="p">,</span> <span class="n">col2</span><span class="p">,</span> <span class="n">col_types</span><span class="p">)</span>
-    <span class="k">return</span></div>
+    <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;successfully analyzed relationship - </span><span class="si">{</span><span class="n">col_types</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
 
 
 
@@ -292,6 +271,10 @@
 <span class="sd">    and mean prices of the filtered games. Optionally, games with a price of 0 can</span>
 <span class="sd">    be excluded from the calculation by setting `drop_zeroes` to True.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">chosen_tag</span> <span class="ow">in</span> <span class="n">tags</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The tag </span><span class="si">{</span><span class="n">chosen_tag</span><span class="si">}</span><span class="s2"> was not found.&quot;</span><span class="p">)</span>
+
     <span class="n">df</span> <span class="o">=</span> <span class="n">tags</span><span class="p">[</span><span class="n">tags</span><span class="p">[</span><span class="n">chosen_tag</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span>
     <span class="n">tag_df</span> <span class="o">=</span> <span class="n">all_games</span><span class="p">[</span><span class="n">all_games</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">df</span><span class="p">)]</span>
 
@@ -351,6 +334,7 @@
 <span class="sd">    To plot the mean prices for the top 8 least expensive tags:</span>
 <span class="sd">    &gt;&gt;&gt; graph_mean_tag_prices(which=&#39;least_exp&#39;, num=8)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">num</span> <span class="o">=</span> <span class="n">num</span><span class="o">+</span><span class="mi">1</span>
     <span class="k">if</span> <span class="n">which</span> <span class="o">==</span> <span class="s1">&#39;common&#39;</span><span class="p">:</span>
         <span class="n">top_tags</span> <span class="o">=</span> <span class="n">tags</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:</span><span class="n">num</span><span class="p">]</span><span class="o">.</span><span class="n">columns</span>
     <span class="k">else</span><span class="p">:</span>
@@ -419,6 +403,13 @@
 <span class="sd">    To compare the tags &#39;Action&#39; and &#39;Adventure&#39;:</span>
 <span class="sd">    &gt;&gt;&gt; compare_two_tags(&#39;Action&#39;, &#39;Adventure&#39;)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">tag1</span> <span class="ow">in</span> <span class="n">tags</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The tag </span><span class="si">{</span><span class="n">tag1</span><span class="si">}</span><span class="s2"> was not found.&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">tag2</span> <span class="ow">in</span> <span class="n">tags</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The tag </span><span class="si">{</span><span class="n">tag2</span><span class="si">}</span><span class="s2"> was not found.&quot;</span><span class="p">)</span>
+
     <span class="n">correlation</span><span class="p">,</span> <span class="n">p_value</span> <span class="o">=</span> <span class="n">pointbiserialr</span><span class="p">(</span><span class="n">tags</span><span class="p">[</span><span class="n">tag1</span><span class="p">],</span> <span class="n">tags</span><span class="p">[</span><span class="n">tag2</span><span class="p">])</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Correlation coefficient: </span><span class="si">{</span><span class="n">correlation</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;P-value: </span><span class="si">{</span><span class="n">p_value</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
@@ -431,7 +422,7 @@
     <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="n">tag2</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Cross-tabulation Heatmap&#39;</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-    <span class="k">return</span></div>
+    <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Successfully compared </span><span class="si">{</span><span class="n">tag1</span><span class="si">}</span><span class="s2"> and </span><span class="si">{</span><span class="n">tag2</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
 
 
 
@@ -453,7 +444,7 @@
 <span class="sd">    Notes</span>
 <span class="sd">    -----</span>
 <span class="sd">    This function is meant to be used in tandem with the tags_related(num, plot) function when plot is set</span>
-<span class="sd">    to true and should not be called manually by the user. It takes in a the result of tags_related(), which</span>
+<span class="sd">    to true and should not be called manually by the user. It takes in the result of tags_related(), which</span>
 <span class="sd">    is a list of tuples, where each tuple contains a tag pair and the count of ones in the cross-tabulation.</span>
 <span class="sd">    It visualizes the results using a bar plot with tag pairs on the x-axis and counts on the y-axis.</span>
 
@@ -465,7 +456,8 @@
 <span class="sd">    To visualize the results for a given list of tag pairs and counts:</span>
 <span class="sd">    &gt;&gt;&gt; tags_related_plot(result)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">pair</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1">-</span><span class="si">{</span><span class="n">pair</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">pair</span><span class="p">,</span> <span class="n">count</span> <span class="ow">in</span> <span class="n">result</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="p">[</span><span class="n">count</span> <span class="k">for</span> <span class="n">pair</span><span class="p">,</span> <span class="n">count</span> <span class="ow">in</span> <span class="n">result</span><span class="p">],</span> <span class="n">palette</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">)</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">pair</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1">-</span><span class="si">{</span><span class="n">pair</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">pair</span><span class="p">,</span> <span class="n">count</span> <span class="ow">in</span> <span class="n">result</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="p">[</span><span class="n">count</span> <span class="k">for</span> <span class="n">pair</span><span class="p">,</span> <span class="n">count</span> <span class="ow">in</span> <span class="n">result</span><span class="p">],</span>
+                <span class="n">palette</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Tag Pairs&#39;</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Count&#39;</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Frequency of Tag Pair Combinations&#39;</span><span class="p">)</span>
@@ -513,7 +505,12 @@
 <span class="sd">    To analyze and plot the relationships for the top 10 tags:</span>
 <span class="sd">    &gt;&gt;&gt; tags_related(10, plot=True)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">df</span> <span class="o">=</span> <span class="n">tags</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:</span><span class="n">num</span><span class="p">]</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">num</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">num</span><span class="si">}</span><span class="s2"> is too small. Please input a number between 2 and 50.&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">num</span> <span class="o">&gt;</span> <span class="mi">50</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">num</span><span class="si">}</span><span class="s2"> is too large. Please input a number between 2 and 50.&quot;</span><span class="p">)</span>
+
+    <span class="n">df</span> <span class="o">=</span> <span class="n">tags</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:</span><span class="n">num</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
     <span class="n">tag_names</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span>
     <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
 
@@ -533,33 +530,56 @@
 
 
 
-
 <div class="viewcode-block" id="top_n_values">
 <a class="viewcode-back" href="../../SteamInsights.html#SteamInsights.analytic_functions.top_n_values">[docs]</a>
-<span class="k">def</span> <span class="nf">top_n_values</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="s1">&#39;developers&#39;</span><span class="p">,</span> <span class="n">criteria</span><span class="o">=</span><span class="s1">&#39;price&#39;</span><span class="p">,</span> <span class="n">top_n</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">top_n_values</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s1">&#39;developers&#39;</span><span class="p">,</span> <span class="n">criteria</span><span class="o">=</span><span class="s1">&#39;price&#39;</span><span class="p">,</span> <span class="n">top_n</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Get the top producers/developers based on the specified criteria.</span>
+<span class="sd">        Generate a summary of the top N values for a specified column based on a given criteria.</span>
 
-<span class="sd">    Parameters:</span>
-<span class="sd">    - df: pandas DataFrame containing game information.</span>
-<span class="sd">    - column: String specifying the desired grouped column (e.g., &#39;developers&#39;, &#39;genres&#39;).</span>
-<span class="sd">    - criteria: String specifying the criteria (&#39;price&#39;, &#39;metacritic_score&#39;, &#39;global_sales&#39;).</span>
-<span class="sd">    - top_n: Number of top producers to retrieve.</span>
-<span class="sd">    - plot: Boolean indicating whether to plot the top values on a bar chart.</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        column : str, optional</span>
+<span class="sd">            The column to group and analyze. Default is &#39;developers&#39;.</span>
+<span class="sd">        criteria : str, optional</span>
+<span class="sd">            The criteria for analysis. Choose from &#39;price&#39;, &#39;metacritic_score&#39;, &#39;user_score&#39;, or &#39;global_sales&#39;.</span>
+<span class="sd">            Default is &#39;price&#39;.</span>
+<span class="sd">        top_n : int, optional</span>
+<span class="sd">            The number of top values to display. Default is 5.</span>
+<span class="sd">        plot : bool, optional</span>
+<span class="sd">            If True, a bar chart of the top values is plotted. Default is False.</span>
 
-<span class="sd">    Returns:</span>
-<span class="sd">    - A DataFrame with the top producers/developers based on the specified criteria.</span>
-<span class="sd">    </span>
-<span class="sd">    Example:</span>
-<span class="sd">    - top_n_values(all_games, column=&#39;developers&#39;, criteria=&#39;global_sales&#39;, top_n=10, plot=True)</span>
-<span class="sd">    </span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        pandas.DataFrame</span>
+<span class="sd">            A DataFrame containing the top N values for the specified column based on the given criteria.</span>
 
-    <span class="k">if</span> <span class="n">criteria</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;price&#39;</span><span class="p">,</span> <span class="s1">&#39;metacritic_score&#39;</span><span class="p">,</span> <span class="s1">&#39;user_score&#39;</span><span class="p">,</span> <span class="s1">&#39;global_sales&#39;</span><span class="p">]:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid criteria. Choose from &#39;price&#39;, &#39;metacritic_score&#39;, &#39;user_score&#39;, or &#39;global_sales&#39;.&quot;</span><span class="p">)</span>
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            If an invalid criteria is provided.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; top_n_values(column=&#39;developers&#39;, criteria=&#39;metacritic_score&#39;, top_n=10, plot=False)</span>
+<span class="sd">        # DataFrame with the top 10 developers based on metacritic_score</span>
+
+<span class="sd">        &gt;&gt;&gt; top_n_values(column=&#39;publishers&#39;, criteria=&#39;global_sales&#39;, top_n=5, plot=True)</span>
+<span class="sd">        # DataFrame with the top 5 publishers based on global_sales, and a corresponding bar chart plot</span>
+
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        - The function calculates the mean of the specified criteria for each group in the specified column.</span>
+<span class="sd">        - It returns the top N groups based on the mean value of the criteria.</span>
+<span class="sd">        - If plot=True, a bar chart is generated to visually represent the top N values.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+    <span class="n">df</span> <span class="o">=</span> <span class="n">all_games</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">criteria</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;price&#39;</span><span class="p">,</span> <span class="s1">&#39;metacritic_score&#39;</span><span class="p">,</span> <span class="s1">&#39;global_sales&#39;</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="s2">&quot;Invalid criteria. Choose from &#39;price&#39;, &#39;metacritic_score&#39;, or &#39;global_sales&#39;.&quot;</span><span class="p">)</span>
 
     <span class="c1"># Group by developers and calculate the mean for the specified criteria</span>
-    
     <span class="n">grouped_df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">column</span><span class="p">)[</span><span class="n">criteria</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
 
     <span class="c1"># Get the top n producers</span>
@@ -582,17 +602,15 @@
 
 <div class="viewcode-block" id="analyze_single_vs_multiplayer">
 <a class="viewcode-back" href="../../SteamInsights.html#SteamInsights.analytic_functions.analyze_single_vs_multiplayer">[docs]</a>
-<span class="k">def</span> <span class="nf">analyze_single_vs_multiplayer</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">analyze_single_vs_multiplayer</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Analyze and compare sales and ratings of single-player and multiplayer games.</span>
-
-<span class="sd">    Parameters:</span>
-<span class="sd">    - df: pandas DataFrame containing game information.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">    - A DataFrame with the summary statistics for single-player and multiplayer games.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
+    <span class="n">df</span> <span class="o">=</span> <span class="n">all_games</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
     <span class="c1"># Filter single-player and multiplayer games</span>
     <span class="n">single_player_games</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;single_player&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="kc">True</span><span class="p">]</span>
     <span class="n">multiplayer_games</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;single_player&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="kc">False</span><span class="p">]</span>
@@ -612,26 +630,113 @@
     <span class="p">})</span>
 
     <span class="c1"># Plot the comparison</span>
-    <span class="c1">#plt.figure(figsize=(12, 6))</span>
+    <span class="c1"># plt.figure(figsize=(12, 6))</span>
 
     <span class="c1"># Sales Comparison</span>
-    <span class="c1">#plt.subplot(1, 2, 1)</span>
-    <span class="c1">#sns.barplot(x=sales_summary.index, y=&#39;mean&#39;, hue=&#39;index&#39;, data=sales_summary.melt(), palette=&#39;Set2&#39;)</span>
-    <span class="c1">#plt.title(&#39;Global Sales Comparison&#39;)</span>
-    <span class="c1">#plt.ylabel(&#39;Global Sales&#39;)</span>
-    <span class="c1">#plt.xlabel(&#39;Game Type&#39;)</span>
+    <span class="c1"># plt.subplot(1, 2, 1)</span>
+    <span class="c1"># sns.barplot(x=sales_summary.index, y=&#39;mean&#39;, hue=&#39;index&#39;, data=sales_summary.melt(), palette=&#39;Set2&#39;)</span>
+    <span class="c1"># plt.title(&#39;Global Sales Comparison&#39;)</span>
+    <span class="c1"># plt.ylabel(&#39;Global Sales&#39;)</span>
+    <span class="c1"># plt.xlabel(&#39;Game Type&#39;)</span>
 
     <span class="c1"># Ratings Comparison</span>
-    <span class="c1">#plt.subplot(1, 2, 2)</span>
-    <span class="c1">#sns.barplot(x=ratings_summary.index, y=&#39;value&#39;, hue=&#39;index&#39;, data=ratings_summary.melt(), palette=&#39;Set2&#39;)</span>
-    <span class="c1">#plt.title(&#39;Ratings Comparison&#39;)</span>
-    <span class="c1">#plt.ylabel(&#39;Average Rating&#39;)</span>
-    <span class="c1">#plt.xlabel(&#39;Game Type&#39;)</span>
+    <span class="c1"># plt.subplot(1, 2, 2)</span>
+    <span class="c1"># sns.barplot(x=ratings_summary.index, y=&#39;value&#39;, hue=&#39;index&#39;, data=ratings_summary.melt(), palette=&#39;Set2&#39;)</span>
+    <span class="c1"># plt.title(&#39;Ratings Comparison&#39;)</span>
+    <span class="c1"># plt.ylabel(&#39;Average Rating&#39;)</span>
+    <span class="c1"># plt.xlabel(&#39;Game Type&#39;)</span>
 
-    <span class="c1">#plt.tight_layout()</span>
-    <span class="c1">#plt.show()</span>
+    <span class="c1"># plt.tight_layout()</span>
+    <span class="c1"># plt.show()</span>
 
     <span class="k">return</span> <span class="n">analysis_results</span></div>
+
+
+
+<div class="viewcode-block" id="recommend">
+<a class="viewcode-back" href="../../SteamInsights.html#SteamInsights.analytic_functions.recommend">[docs]</a>
+<span class="k">def</span> <span class="nf">recommend</span><span class="p">(</span><span class="n">num_games</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">price_min</span><span class="o">=</span><span class="mf">0.00</span><span class="p">,</span> <span class="n">price_max</span><span class="o">=</span><span class="mf">60.00</span><span class="p">,</span> <span class="n">tags_to_filter</span><span class="o">=</span><span class="p">[],</span>
+              <span class="n">developers</span><span class="o">=</span><span class="p">[],</span> <span class="n">publishers</span><span class="o">=</span><span class="p">[],</span> <span class="n">players</span><span class="o">=</span><span class="s2">&quot;single/multi&quot;</span><span class="p">,</span> <span class="n">os</span><span class="o">=</span><span class="s1">&#39;windows&#39;</span><span class="p">,</span> <span class="n">reviews</span><span class="o">=</span><span class="s1">&#39;Mixed&#39;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Recommends a specified number of games based on user-defined metrics.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">    - num_games (int): Number of games to recommend.</span>
+<span class="sd">    - price_min (float): Minimum price filter for games.</span>
+<span class="sd">    - price_max (float): Maximum price filter for games.</span>
+<span class="sd">    - tags_to_filter (list): List of tags to filter games by.</span>
+<span class="sd">    - developers (list): List of developers to filter games by.</span>
+<span class="sd">    - publishers (list): List of publishers to filter games by.</span>
+<span class="sd">    - players (str): Type of players (&#39;single&#39;, &#39;multi&#39;, or &#39;single/multi&#39;).</span>
+<span class="sd">    - OS (str): Operating system filter (&#39;windows&#39;, &#39;mac&#39;, or &#39;linux&#39;).</span>
+<span class="sd">    - reviews (str): Sentiment level to filter games by.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">    - pandas.Series: Series containing the names of the recommended games.</span>
+
+<span class="sd">    Example usage:</span>
+<span class="sd">    &gt;&gt;&gt; recommend(num_games=10, tags_to_filter=[&#39;Action&#39;, &#39;Adventure&#39;])</span>
+<span class="sd">    &gt;&gt;&gt; recommend(num_games=10, developers=[&#39;Valve&#39;])</span>
+<span class="sd">    &gt;&gt;&gt; recommend(num_games=5, publishers=[&#39;Valve&#39;])</span>
+<span class="sd">    &gt;&gt;&gt; recommend(num_games=10, players=&quot;single&quot;, os=&quot;mac&quot;)</span>
+<span class="sd">    &gt;&gt;&gt; recommend(num_games=10, reviews=&quot;Positive&quot;)</span>
+<span class="sd">    &gt;&gt;&gt; recommend(num_games=1, price_min=0, price_max=10)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># filter all_games by games that appear in the right range:</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">all_games</span><span class="p">[(</span><span class="n">all_games</span><span class="p">[</span><span class="s1">&#39;price&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">price_min</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">all_games</span><span class="p">[</span><span class="s1">&#39;price&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">price_max</span><span class="p">)]</span>
+
+    <span class="c1"># filter priced by games that have these tags</span>
+    <span class="k">if</span> <span class="n">tags_to_filter</span><span class="p">:</span>
+        <span class="n">tag_filter_condition</span> <span class="o">=</span> <span class="n">tags</span><span class="p">[</span><span class="n">tags_to_filter</span><span class="p">]</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">tags</span><span class="p">[</span><span class="n">tag_filter_condition</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">])]</span>
+
+    <span class="c1"># filter by certain developer(s) if not empty</span>
+    <span class="k">if</span> <span class="n">developers</span><span class="p">:</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;developers&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">developers</span><span class="p">)]</span>
+
+    <span class="c1"># filter by certain publisher(s) if not empty</span>
+    <span class="k">if</span> <span class="n">publishers</span><span class="p">:</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;publishers&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">publishers</span><span class="p">)]</span>
+
+    <span class="c1"># filter to the number of players specified</span>
+    <span class="k">if</span> <span class="n">players</span> <span class="o">==</span> <span class="s2">&quot;single&quot;</span><span class="p">:</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;players&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;single&#39;</span><span class="p">]</span>
+    <span class="k">elif</span> <span class="n">players</span> <span class="o">==</span> <span class="s2">&quot;multi&quot;</span><span class="p">:</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;players&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;multi&#39;</span><span class="p">]</span>
+    <span class="c1"># else do nothing</span>
+
+    <span class="c1"># filter to a certain operating system</span>
+    <span class="k">if</span> <span class="n">os</span> <span class="o">==</span> <span class="s2">&quot;mac&quot;</span><span class="p">:</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;mac&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="k">elif</span> <span class="n">os</span> <span class="o">==</span> <span class="s2">&quot;linux&quot;</span><span class="p">:</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;linux&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="c1"># else windows --&gt; do nothing</span>
+
+    <span class="n">sentiment_mapping</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;Overwhelmingly Negative&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Overwhelmingly Negative&#39;</span><span class="p">,</span> <span class="s1">&#39;Mostly Negative&#39;</span><span class="p">,</span> <span class="s1">&#39;Very Negative&#39;</span><span class="p">,</span> <span class="s1">&#39;Negative&#39;</span><span class="p">,</span> <span class="s1">&#39;Mixed&#39;</span><span class="p">,</span>
+                                    <span class="s1">&#39;Positive&#39;</span><span class="p">,</span> <span class="s1">&#39;Very Positive&#39;</span><span class="p">,</span> <span class="s1">&#39;Mostly Positive&#39;</span><span class="p">,</span> <span class="s1">&#39;Overwhelmingly Positive&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;Mostly Negative&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Mostly Negative&#39;</span><span class="p">,</span> <span class="s1">&#39;Very Negative&#39;</span><span class="p">,</span> <span class="s1">&#39;Negative&#39;</span><span class="p">,</span> <span class="s1">&#39;Mixed&#39;</span><span class="p">,</span> <span class="s1">&#39;Positive&#39;</span><span class="p">,</span> <span class="s1">&#39;Very Positive&#39;</span><span class="p">,</span>
+                            <span class="s1">&#39;Mostly Positive&#39;</span><span class="p">,</span> <span class="s1">&#39;Overwhelmingly Positive&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;Very Negative&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Very Negative&#39;</span><span class="p">,</span> <span class="s1">&#39;Negative&#39;</span><span class="p">,</span> <span class="s1">&#39;Mixed&#39;</span><span class="p">,</span> <span class="s1">&#39;Positive&#39;</span><span class="p">,</span> <span class="s1">&#39;Very Positive&#39;</span><span class="p">,</span> <span class="s1">&#39;Mostly Positive&#39;</span><span class="p">,</span>
+                          <span class="s1">&#39;Overwhelmingly Positive&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;Negative&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Negative&#39;</span><span class="p">,</span> <span class="s1">&#39;Mixed&#39;</span><span class="p">,</span> <span class="s1">&#39;Positive&#39;</span><span class="p">,</span> <span class="s1">&#39;Very Positive&#39;</span><span class="p">,</span> <span class="s1">&#39;Mostly Positive&#39;</span><span class="p">,</span> <span class="s1">&#39;Overwhelmingly Positive&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;Mixed&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Mixed&#39;</span><span class="p">,</span> <span class="s1">&#39;Positive&#39;</span><span class="p">,</span> <span class="s1">&#39;Very Positive&#39;</span><span class="p">,</span> <span class="s1">&#39;Mostly Positive&#39;</span><span class="p">,</span> <span class="s1">&#39;Overwhelmingly Positive&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;Positive&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Positive&#39;</span><span class="p">,</span> <span class="s1">&#39;Very Positive&#39;</span><span class="p">,</span> <span class="s1">&#39;Mostly Positive&#39;</span><span class="p">,</span> <span class="s1">&#39;Overwhelmingly Positive&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;Very Positive&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Very Positive&#39;</span><span class="p">,</span> <span class="s1">&#39;Mostly Positive&#39;</span><span class="p">,</span> <span class="s1">&#39;Overwhelmingly Positive&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;Mostly Positive&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Mostly Positive&#39;</span><span class="p">,</span> <span class="s1">&#39;Overwhelmingly Positive&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;Overwhelmingly Positive&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Overwhelmingly Positive&#39;</span><span class="p">]</span>
+    <span class="p">}</span>
+
+    <span class="n">sentiment_values</span> <span class="o">=</span> <span class="n">sentiment_mapping</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">reviews</span><span class="p">,</span> <span class="p">[])</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;all_sentiment&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">sentiment_values</span><span class="p">)]</span>
+
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;all_review_number&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="s1">&#39;name&#39;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="n">num_games</span><span class="p">)</span></div>
+
+
 
 </pre></div>
 
