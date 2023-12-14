@@ -1,6 +1,8 @@
-import pandas as pd
-import numpy as np
+"""
+These are functions to use for generating summary statistics for games and producers by various metrics.
+"""
 
+import pandas as pd
 import pkg_resources
 
 
@@ -34,7 +36,9 @@ def game_summary(game_name):
     """
 
     summary = all_games[all_games['name'] == game_name]
+    summary.reset_index(inplace=True)
     return summary.loc[:, ['name', 'publishers', 'developers', 'all_sentiment', 'global_sales', 'release_year']]
+
 
 
 def get_sentiment(game_name):
@@ -63,7 +67,7 @@ def get_sentiment(game_name):
     """
 
     sentiment = all_games[all_games['name'] == game_name]
-    return sentiment.loc[:, ['name', 'recent_sentiment', 'recent_review_number', 'recent_positive_percentage', 'all_sentiment', 'all_review_number', 'all_positive_percentage']]
+    return sentiment.loc[:, ['name', 'recent_sentiment', 'recent_review_number', 'recent_positive_percentage', 'all_sentiment', 'all_review_number', 'all_positive_percentage' ]]
 
 
 def get_sales_info(game_name):
@@ -85,6 +89,7 @@ def get_sales_info(game_name):
     """
 
     sale = all_games[all_games['name'] == game_name]
+    sale.reset_index(inplace=True)
     return sale.loc[:, ['name', 'price', 'estimated_owners', 'global_sales', 'release_year']]
 
 
@@ -107,7 +112,8 @@ def get_genre(game_name):
     """
 
     genres = all_games[all_games['name'] == game_name]
-    return genres.loc[:, ['name', 'achievements', 'single_player', 'categories', 'genres', 'tags', 'popular_tags']]
+    genres.reset_index(inplace=True)
+    return genres.loc[:, ['name', 'achievements', 'single_player', 'genres']]
 
 
 def get_tags(game_name):
@@ -128,6 +134,7 @@ def get_tags(game_name):
     """
 
     game_tags = tags[tags['name'] == game_name]
+    game_tags.reset_index(inplace=True)
     return game_tags.columns[game_tags.iloc[0] == 1].tolist()
 
 
@@ -151,6 +158,7 @@ def get_comp_req(game_name):
     """
 
     requirements = all_games[all_games['name'] == game_name]
+    requirements.reset_index(inplace=True)
     return requirements.loc[:, ['name', 'windows', 'mac', 'linux']]
 
 
@@ -161,9 +169,9 @@ def company_summary(company_name, developer=True):
     Parameters
     ----------
     company_name : str
-    - The name of the company for which to generate the summary.
+        The name of the company for which to generate the summary.
     developer : bool, optional
-    - If True, consider games developed by the company. If False, consider games published by the company. Default is True.
+        If True, consider games developed by the company. If False, consider games published by the company. Default is True.
 
     Returns
     -------
@@ -175,27 +183,45 @@ def company_summary(company_name, developer=True):
     the most common sentiment among those games, and information about the price range.
 
     Parameters:
-    - company_name (str): The name of the company for which to generate the summary.
-    - developer (bool, optional): If True, consider games developed by the company. If False, consider games published by the company. Default is True.
+    - company_name (str): The name of the gaming company to summarize.
+    - developer (bool, optional): If True, the function searches for the company in the 'developers' column.
+                                  If False, it searches in the 'publishers' column. Default is True.
 
-    Examples
-    --------
-    To generate a summary for games developed by Rockstar Games:
-    >>> company_summary('Rockstar Games', True)
+    Returns:
+    None: The function prints a summary of the company's presence on Steam.
 
-    To generate a summary for games published by Electronic Arts:
+    Example:
     >>> company_summary('Electronic Arts', False)
     """
-
-    if developer:
-        df = all_games[all_games['developer'] == company_name]
+    # Check if there are rows for both 'developers' and 'publishers'
+    if not all_games[(all_games['developers'].str.contains(company_name, na=False)) &
+                     (all_games['publishers'].str.contains(company_name, na=False))].empty:
+        df_d = all_games[all_games['developers'].str.strip().str.contains(company_name, na=False)]
+        df_p = all_games[all_games['publishers'].str.strip().str.contains(company_name, na=False)]
+        df = pd.concat([df_d, df_p], ignore_index=True)
     else:
-        df = all_games[all_games['publishers'] == company_name]
+        # Check if developer or publisher data is available
+        if developer:
+            if not all_games[all_games['developers'].str.strip().str.contains(company_name, na=False)].empty:
+                df = all_games[all_games['developers'].str.strip().str.contains(company_name, na=False)]
+            else:
+                print(f'The company {company_name} is not listed as a developer.')
+                return str("Not a developer")
+        else:
+            if not all_games[all_games['publishers'].str.strip().str.contains(company_name, na=False)].empty:
+                df = all_games[all_games['publishers'].str.strip().str.contains(company_name, na=False)]
+            else:
+                print(f'The company {company_name} is not listed as a publisher.')
+                return str("Not a publisher")
 
+    # Compute sentiment value counts
     vc = df['all_sentiment'].value_counts()
+
+    # Find max and min prices
     max_price = df['price'].max()
     min_price = df['price'].min()
 
+    # Print summary information
     print(f'{company_name} has {len(df)} total games on Steam.')
     print(f'The most common sentiment is {vc.idxmax()} from {vc[0]} of their {len(df)} games.')
 
@@ -208,3 +234,4 @@ def company_summary(company_name, developer=True):
     else:
         print(f'Their most expensive game is ${max_price}, while their least expensive game is ${min_price}.')
     return
+
