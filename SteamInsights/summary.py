@@ -1,6 +1,8 @@
-import pandas as pd
-import numpy as np
+"""
+These are functions to use for generating summary statistics for games and producers by various metrics.
+"""
 
+import pandas as pd
 import pkg_resources
 
 

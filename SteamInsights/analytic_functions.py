@@ -1,3 +1,7 @@
+"""
+These are functions to use for analyzing and visualizing the steam dataset.
+"""
+
 import pandas as pd
 import numpy as np
 from scipy.stats import pearsonr
@@ -256,6 +260,7 @@ def graph_mean_tag_prices(which='common', num=10, drop_zeroes=True):
     To plot the mean prices for the top 8 least expensive tags:
     >>> graph_mean_tag_prices(which='least_exp', num=8)
     """
+    num = num+1
     if which == 'common':
         top_tags = tags.iloc[:, 1:num].columns
     else:
@@ -359,7 +364,7 @@ def tags_related_plot(result):
     Notes
     -----
     This function is meant to be used in tandem with the tags_related(num, plot) function when plot is set
-    to true and should not be called manually by the user. It takes in a the result of tags_related(), which
+    to true and should not be called manually by the user. It takes in the result of tags_related(), which
     is a list of tuples, where each tuple contains a tag pair and the count of ones in the cross-tabulation.
     It visualizes the results using a bar plot with tag pairs on the x-axis and counts on the y-axis.
 

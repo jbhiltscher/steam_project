@@ -1,3 +1,7 @@
+"""
+This script loads the raw data for the games, tags, and ratings files.
+"""
+
 import pkg_resources
 import pandas as pd
 
