@@ -39,7 +39,9 @@ Below is a quick demo of how to load in data using the package:
 
 
 In order to obtain a game recommendation, we can run the following function with the desired metrics:
+
 .. code-block:: python
+
     recommend(num_games=5,price_max=20, tags_to_filter=['Action'], reviews="Positive")
 
 
