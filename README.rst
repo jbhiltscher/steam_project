@@ -31,7 +31,7 @@ Below is a quick demo of how to load in data using the package:
     import matplotlib.pyplot as plt
     import seaborn as sns
     import pkg_resources
-    from SteamInsights import load_data
+    from SteamInsights.load_data import load_data
 
     all_games = load_data('all_games')
     tags = load_data('tags')
@@ -42,6 +42,7 @@ In order to obtain a game recommendation, we can run the following function with
 
 .. code-block:: python
 
+    from SteamInsights.analytic_functions import recommend
     recommend(num_games=5,price_max=20, tags_to_filter=['Action'], reviews="Positive")
 
 
@@ -51,6 +52,7 @@ By developers:
 
 .. code-block:: python
 
+    from SteamInsights.analytic_functions import top_n_values
     top_n_values(column='developers', criteria='global_sales', top_n=6, plot=True)
 
 .. image:: figures/top_n_values_developers.png
@@ -59,6 +61,7 @@ By producers:
 
 .. code-block:: python
 
+    from SteamInsights.analytic_functions import top_n_values
     top_n_values(column='publishers', criteria='global_sales', top_n=6, plot=True)
 
 .. image:: figures/top_n_values_publishers.png
@@ -68,6 +71,7 @@ We can also look at the mean price of games with the top 10 most common tags.
 
 .. code-block:: python
 
+    from SteamInsights.analytic_functions import graph_mean_tag_prices
     graph_mean_tag_prices(which='common', num=10)
 
 .. image:: figures/common_tag_price.png
