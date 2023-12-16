@@ -75,3 +75,23 @@ We can also look at the mean price of games with the top 10 most common tags.
     graph_mean_tag_prices(which='common', num=10)
 
 .. image:: figures/common_tag_price.png
+
+
+Citations
+-------------
+Here are the citations for the 5 Kaggle datasets that we used in this project:
+
+Martin Bustos Roman. (2022). Steam Games Dataset. https://www.kaggle.com/datasets/fronkongames/steam-games-dataset
+
+Aleksandr Antonov. (2022, January). Steam Games Complete Dataset, Version 1. https://www.kaggle.com/datasets/trolukovich/steam-games-complete-dataset
+
+Rush Kirubi. (2016). Video Game Sales with Ratings. https://www.kaggle.com/datasets/rush4ratio/video-game-sales-with-ratings
+
+Kendall Gillies. (2017). Video Game Sales and Ratings. https://www.kaggle.com/datasets/kendallgillies/video-game-sales-and-ratings
+
+Mohammed Alhamad. (2020). Video Games Rating by ESRB, Version not available. https://www.kaggle.com/datasets/imohtn/video-games-rating-by-esrb?select=Video_games_esrb_rating.csv
+
+(This last citation was a Kaggle dataset that was included in the project but we didn't end up using.)
+
+
+
